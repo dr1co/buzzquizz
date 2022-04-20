@@ -23,11 +23,11 @@ function resetVerify(answersLabels, questionsText, questionsBackgroundColor, ima
 
     all.forEach(el => {
         el.style.borderColor = '#D1D1D1';
-    })
+    });
 
     warnings.forEach(warning => {
         warning.style.display = 'none';
-    })
+    });
 }
 
 function verifyAnswersLabels(answersLabels) {
