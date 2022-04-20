@@ -76,9 +76,10 @@ function verifyQuestionsText(questionsText, questionTextWarning) {
 
 function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackgroundColorWarning) {
     let error = 0;
+    const regex = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
 
     questionsBackgroundColor.forEach(label => {
-        if (label.value.length < 7 || label.value.indexOf('#') < 0) {
+        if (label.value.search(regex) < 0) {
             setLabelBorderWarning(label)
             error++;
         }
@@ -92,9 +93,10 @@ function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackg
 
 function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
     let error = 0;
+    const regex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
     imagesUrl.forEach(label => {
-        if (label.value.length === 0 || label.value.indexOf('https://') < 0) {
+        if (label.value.search(regex) < 0) {
             setLabelBorderWarning(label)
             error++;
         }
