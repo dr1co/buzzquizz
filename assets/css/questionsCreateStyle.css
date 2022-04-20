@@ -1,4 +1,8 @@
-.questions-creation h3 {
+#questions-creation {
+    padding-bottom: 468px;
+}
+
+#questions-creation h3 {
     margin-top: 63px;
     margin-bottom: 36px;
 }
@@ -13,4 +17,17 @@
 
 .incorrect-group-input-margin {
     margin-bottom: 32px;
+}
+
+#questions-creation button {
+    width: 354px;
+    height: 54px;
+    margin-top: 81px;
+    background: #EC362D;
+    border-radius: 15px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    color: #FFF5F4;
+    cursor: pointer;
 }
