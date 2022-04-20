@@ -2,6 +2,14 @@
     margin-top: 63px;
 }
 
+.questions {
+    max-width: 600px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+}
+
 .incorrect-group-input-margin {
     margin-bottom: 32px;
 }
