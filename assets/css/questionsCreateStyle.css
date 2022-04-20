@@ -32,3 +32,12 @@
     color: #FFF5F4;
     cursor: pointer;
 }
+
+#answer-label-warning, #image-url-warning, #question-text-warning, #warning, #question-background-color-warning {
+    display: none;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #EC362D;
+    margin-top: 27px;
+}
