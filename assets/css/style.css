@@ -7,6 +7,7 @@
     outline: none;
     text-decoration: none;
     list-style: unset;
+    border: none;
 }
 
 body {
@@ -28,4 +29,59 @@ header .header-title {
     font-size: 37px;
     line-height: 43px;
     color: #fff;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.default-input-group-width {
+    width: 600px;
+}
+
+.default-input-style {
+    max-width: 564px;
+    height: 46px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-left: 23px;
+}
+
+.default-input-style::placeholder {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    font-style: italic;
+    color: #BABABA;
+}
+
+.default-title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    margin-bottom: 14px;
+    padding-top: 28px;
 }
