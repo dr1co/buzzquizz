@@ -17,18 +17,20 @@
 <header>
     <h1 class="header-title">BuzzQuizz</h1>
 </header>
-<div class="criacao-infos-basicas">
-    <h1 class="default-title flex justify-content-center"> Comece pelo começo </h1>
-        <div class="quizz-box flex flex-direction-column justify-content-center align-items-center">
-        <input class="default-input-style" placeholder="Título do seu quizz">
-        <input class="default-input-style" placeholder="URL da imagem do seu quizz">
-        <input class="default-input-style" placeholder="Quantidade de perguntas do quizz">
-        <input class="default-input-style" placeholder="Quantidade de níveis do quizz">
-    </div>
-    <div class="flex justify-content-center">
-        <button class="create-questions-button"> Prosseguir para criar perguntas </button>
-    </div>
-</div>
+<main>
+    <section id="criacao-infos-basicas">
+        <h1 class="default-title flex justify-content-center"> Comece pelo começo </h1>
+            <div class="quizz-box flex flex-direction-column justify-content-center align-items-center">
+            <input class="default-input-style" type="text" id="quizzTitle" placeholder="Título do seu quizz">
+            <input class="default-input-style" type="text" id="quizzImage" placeholder="URL da imagem do seu quizz">
+            <input class="default-input-style" type="text" id="quizzNumberQuestions" placeholder="Quantidade de perguntas do quizz">
+            <input class="default-input-style" type="text" id="quizzNumberLevels" placeholder="Quantidade de níveis do quizz">
+        </div>
+        <div class="flex justify-content-center">
+            <button class="create-questions-button" onclick="submitQuizzBasicInfos()"> Prosseguir para criar perguntas </button>
+        </div>
+    </section>
+</main>
 <!-- DEFAULT JS -->
 <script src="./assets/js/script.js"></script>
 <!-- CONTEXT JS -->
