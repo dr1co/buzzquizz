@@ -34,7 +34,7 @@ function showWarningMessage(labelError) {
     return true;
 }
 
-function setBorderLabelWarning(label) {
+function setLabelBorderWarning(label) {
     label.style.borderColor = '#EC362D';
 }
 
@@ -43,7 +43,7 @@ function verifyAnswersLabels(answersLabels, answerLabelWarning, generalWarning) 
 
     answersLabels.forEach(label => {
         if (!label.value) {
-            setBorderLabelWarning(label);
+            setLabelBorderWarning(label);
             error++;
         }
     });
@@ -61,7 +61,7 @@ function verifyQuestionsText(questionsText, questionTextWarning, generalWarning)
 
     questionsText.forEach(label => {
         if (label.value.length < 20) {
-            setBorderLabelWarning(label)
+            setLabelBorderWarning(label)
             error++;
         }
     });
@@ -79,7 +79,7 @@ function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackg
 
     questionsBackgroundColor.forEach(label => {
         if (label.value.length < 7 || label.value.indexOf('#') < 0) {
-            setBorderLabelWarning(label)
+            setLabelBorderWarning(label)
             error++;
         }
     });
@@ -97,7 +97,7 @@ function verifyImagesUrl(imagesUrl, imagesUrlWarning, generalWarning) {
 
     imagesUrl.forEach(label => {
         if (label.value.length === 0 || label.value.indexOf('https://') < 0) {
-            setBorderLabelWarning(label)
+            setLabelBorderWarning(label)
             error++;
         }
     });
