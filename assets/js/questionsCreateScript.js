@@ -6,6 +6,8 @@ function verifyInputs() {
 
     verifyAnswersLabels(answersLabels);
     verifyQuestionsText(questionsText);
+    verifyQuestionsBackgroundColor(questionsBackgroundColor);
+    verifyImagesUrl(imagesUrl);
 }
 
 function verifyAnswersLabels(answersLabels) {
@@ -24,7 +26,11 @@ function verifyAnswersLabels(answersLabels) {
 
         answersLabelsError.style.display = 'block';
         generalWarning.style.display = 'block';
+
+        return false;
     }
+
+    return true;
 }
 
 function verifyQuestionsText(questionsText) {
@@ -43,5 +49,55 @@ function verifyQuestionsText(questionsText) {
 
         questionsTextError.style.display = 'block';
         generalWarning.style.display = 'block';
+
+        return false;
     }
+
+    return true;
+}
+
+function verifyQuestionsBackgroundColor(questionsBackgroundColor) {
+    let error = 0;
+
+    questionsBackgroundColor.forEach(label => {
+        if (label.value.length < 7 || label.value.indexOf('#') < 0) {
+            label.style.borderColor = '#EC362D';
+            error++;
+        }
+    });
+
+    if (error > 0) {
+        const questionBackgroundColorError = document.getElementById('question-background-color-warning');
+        const generalWarning = document.getElementById('warning');
+
+        questionBackgroundColorError.style.display = 'block';
+        generalWarning.style.display = 'block';
+
+        return false;
+    }
+
+    return true;
+}
+
+function verifyImagesUrl(imagesUrl) {
+    let error = 0;
+
+    imagesUrl.forEach(label => {
+        if (label.value.length === 0 || label.value.indexOf('https://') < 0) {
+            label.style.borderColor = '#EC362D';
+            error++;
+        }
+    });
+
+    if (error > 0) {
+        const imagesUrlError = document.getElementById('image-url-warning');
+        const generalWarning = document.getElementById('warning');
+
+        imagesUrlError.style.display = 'block';
+        generalWarning.style.display = 'block';
+
+        return false;
+    }
+
+    return true;
 }
