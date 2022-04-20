@@ -13,10 +13,15 @@ function verifyInputs() {
     const warnings = [answerLabelWarning, questionTextWarning, questionBackgroundColorWarning, imagesUrlWarning, generalWarning];
 
     resetVerify(allInputs, warnings);
-    verifyAnswersLabels(answersLabels, answerLabelWarning, generalWarning);
-    verifyQuestionsText(questionsText, questionTextWarning, generalWarning);
-    verifyQuestionsBackgroundColor(questionsBackgroundColor, questionBackgroundColorWarning, generalWarning);
-    verifyImagesUrl(imagesUrl, imagesUrlWarning, generalWarning);
+
+    try {
+        verifyQuestionsText(questionsText, questionTextWarning);
+        verifyQuestionsBackgroundColor(questionsBackgroundColor, questionBackgroundColorWarning);
+        verifyAnswersLabels(answersLabels, answerLabelWarning);
+        verifyImagesUrl(imagesUrl, imagesUrlWarning);
+    } catch (e) {
+        showWarningMessage(generalWarning);
+    }
 }
 
 function resetVerify(allInputs, warnings) {
@@ -31,14 +36,13 @@ function resetVerify(allInputs, warnings) {
 
 function showWarningMessage(labelError) {
     labelError.style.display = 'block';
-    return true;
 }
 
 function setLabelBorderWarning(label) {
     label.style.borderColor = '#EC362D';
 }
 
-function verifyAnswersLabels(answersLabels, answerLabelWarning, generalWarning) {
+function verifyAnswersLabels(answersLabels, answerLabelWarning) {
     let error = 0;
 
     answersLabels.forEach(label => {
@@ -50,13 +54,11 @@ function verifyAnswersLabels(answersLabels, answerLabelWarning, generalWarning) 
 
     if (error > 0) {
         showWarningMessage(answerLabelWarning);
-        showWarningMessage(generalWarning);
+        throw new Error();
     }
-
-    return true;
 }
 
-function verifyQuestionsText(questionsText, questionTextWarning, generalWarning) {
+function verifyQuestionsText(questionsText, questionTextWarning) {
     let error = 0;
 
     questionsText.forEach(label => {
@@ -68,13 +70,11 @@ function verifyQuestionsText(questionsText, questionTextWarning, generalWarning)
 
     if (error > 0) {
         showWarningMessage(questionTextWarning);
-        showWarningMessage(generalWarning);
+        throw new Error();
     }
-
-    return true;
 }
 
-function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackgroundColorWarning, generalWarning) {
+function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackgroundColorWarning) {
     let error = 0;
 
     questionsBackgroundColor.forEach(label => {
@@ -86,13 +86,11 @@ function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackg
 
     if (error > 0) {
         showWarningMessage(questionsBackgroundColorWarning);
-        showWarningMessage(generalWarning);
+        throw new Error();
     }
-
-    return true;
 }
 
-function verifyImagesUrl(imagesUrl, imagesUrlWarning, generalWarning) {
+function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
     let error = 0;
 
     imagesUrl.forEach(label => {
@@ -104,8 +102,6 @@ function verifyImagesUrl(imagesUrl, imagesUrlWarning, generalWarning) {
 
     if (error > 0) {
         showWarningMessage(imagesUrlWarning);
-        showWarningMessage(generalWarning);
+        throw new Error();
     }
-
-    return true;
 }
