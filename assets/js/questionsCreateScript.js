@@ -3,25 +3,24 @@ function verifyInputs() {
     const questionsText = document.getElementsByName('question-text');
     const questionsBackgroundColor = document.getElementsByName('question-background-color');
     const imagesUrl = document.getElementsByName('image-url');
+    const answerLabelWarning = document.getElementById('answer-label-warning');
+    const questionTextWarning = document.getElementById('question-text-warning');
+    const questionBackgroundColorWarning = document.getElementById('question-background-color-warning');
+    const imagesUrlWarning = document.getElementById('image-url-warning');
+    const generalWarning = document.getElementById('warning');
 
-    resetVerify(answersLabels, questionsText, questionsBackgroundColor, imagesUrl);
-    verifyAnswersLabels(answersLabels);
-    verifyQuestionsText(questionsText);
-    verifyQuestionsBackgroundColor(questionsBackgroundColor);
-    verifyImagesUrl(imagesUrl);
+    const allInputs = [...answersLabels, ...questionsText, ...questionsBackgroundColor, ...imagesUrl];
+    const warnings = [answerLabelWarning, questionTextWarning, questionBackgroundColorWarning, imagesUrlWarning, generalWarning];
+
+    resetVerify(allInputs, warnings);
+    verifyAnswersLabels(answersLabels, answerLabelWarning, generalWarning);
+    verifyQuestionsText(questionsText, questionTextWarning, generalWarning);
+    verifyQuestionsBackgroundColor(questionsBackgroundColor, questionBackgroundColorWarning, generalWarning);
+    verifyImagesUrl(imagesUrl, imagesUrlWarning, generalWarning);
 }
 
-function resetVerify(answersLabels, questionsText, questionsBackgroundColor, imagesUrl) {
-    const all = [...answersLabels, ...questionsText, ...questionsBackgroundColor, ...imagesUrl];
-    const warnings = [
-        document.getElementById('warning'),
-        document.getElementById('answer-label-warning'),
-        document.getElementById('image-url-warning'),
-        document.getElementById('question-background-color-warning'),
-        document.getElementById('question-text-warning')
-    ];
-
-    all.forEach(el => {
+function resetVerify(allInputs, warnings) {
+    allInputs.forEach(el => {
         el.style.borderColor = '#D1D1D1';
     });
 
@@ -30,93 +29,82 @@ function resetVerify(answersLabels, questionsText, questionsBackgroundColor, ima
     });
 }
 
-function verifyAnswersLabels(answersLabels) {
+function showWarningMessage(labelError) {
+    labelError.style.display = 'block';
+    return true;
+}
+
+function setBorderLabelWarning(label) {
+    label.style.borderColor = '#EC362D';
+}
+
+function verifyAnswersLabels(answersLabels, answerLabelWarning, generalWarning) {
     let error = 0;
 
     answersLabels.forEach(label => {
         if (!label.value) {
-            label.style.borderColor = '#EC362D';
+            setBorderLabelWarning(label);
             error++;
         }
     });
 
     if (error > 0) {
-        const answersLabelsError = document.getElementById('answer-label-warning');
-        const generalWarning = document.getElementById('warning');
-
-        answersLabelsError.style.display = 'block';
-        generalWarning.style.display = 'block';
-
-        return false;
+        showWarningMessage(answerLabelWarning);
+        showWarningMessage(generalWarning);
     }
 
     return true;
 }
 
-function verifyQuestionsText(questionsText) {
+function verifyQuestionsText(questionsText, questionTextWarning, generalWarning) {
     let error = 0;
 
     questionsText.forEach(label => {
         if (label.value.length < 20) {
-            label.style.borderColor = '#EC362D';
+            setBorderLabelWarning(label)
             error++;
         }
     });
 
     if (error > 0) {
-        const questionsTextError = document.getElementById('question-text-warning');
-        const generalWarning = document.getElementById('warning');
-
-        questionsTextError.style.display = 'block';
-        generalWarning.style.display = 'block';
-
-        return false;
+        showWarningMessage(questionTextWarning);
+        showWarningMessage(generalWarning);
     }
 
     return true;
 }
 
-function verifyQuestionsBackgroundColor(questionsBackgroundColor) {
+function verifyQuestionsBackgroundColor(questionsBackgroundColor, questionsBackgroundColorWarning, generalWarning) {
     let error = 0;
 
     questionsBackgroundColor.forEach(label => {
         if (label.value.length < 7 || label.value.indexOf('#') < 0) {
-            label.style.borderColor = '#EC362D';
+            setBorderLabelWarning(label)
             error++;
         }
     });
 
     if (error > 0) {
-        const questionBackgroundColorError = document.getElementById('question-background-color-warning');
-        const generalWarning = document.getElementById('warning');
-
-        questionBackgroundColorError.style.display = 'block';
-        generalWarning.style.display = 'block';
-
-        return false;
+        showWarningMessage(questionsBackgroundColorWarning);
+        showWarningMessage(generalWarning);
     }
 
     return true;
 }
 
-function verifyImagesUrl(imagesUrl) {
+function verifyImagesUrl(imagesUrl, imagesUrlWarning, generalWarning) {
     let error = 0;
 
     imagesUrl.forEach(label => {
         if (label.value.length === 0 || label.value.indexOf('https://') < 0) {
-            label.style.borderColor = '#EC362D';
+            setBorderLabelWarning(label)
             error++;
         }
     });
 
     if (error > 0) {
-        const imagesUrlError = document.getElementById('image-url-warning');
-        const generalWarning = document.getElementById('warning');
-
-        imagesUrlError.style.display = 'block';
-        generalWarning.style.display = 'block';
-
-        return false;
+        showWarningMessage(imagesUrlWarning);
+        showWarningMessage(generalWarning);
     }
 
     return true;
