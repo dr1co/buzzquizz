@@ -4,10 +4,30 @@ function verifyInputs() {
     const questionsBackgroundColor = document.getElementsByName('question-background-color');
     const imagesUrl = document.getElementsByName('image-url');
 
+    resetVerify(answersLabels, questionsText, questionsBackgroundColor, imagesUrl);
     verifyAnswersLabels(answersLabels);
     verifyQuestionsText(questionsText);
     verifyQuestionsBackgroundColor(questionsBackgroundColor);
     verifyImagesUrl(imagesUrl);
+}
+
+function resetVerify(answersLabels, questionsText, questionsBackgroundColor, imagesUrl) {
+    const all = [...answersLabels, ...questionsText, ...questionsBackgroundColor, ...imagesUrl];
+    const warnings = [
+        document.getElementById('warning'),
+        document.getElementById('answer-label-warning'),
+        document.getElementById('image-url-warning'),
+        document.getElementById('question-background-color-warning'),
+        document.getElementById('question-text-warning')
+    ];
+
+    all.forEach(el => {
+        el.style.borderColor = '#D1D1D1';
+    })
+
+    warnings.forEach(warning => {
+        warning.style.display = 'none';
+    })
 }
 
 function verifyAnswersLabels(answersLabels) {
