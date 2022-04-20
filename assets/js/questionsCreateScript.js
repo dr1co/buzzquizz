@@ -46,9 +46,11 @@ function verifyAnswersLabels(answersLabels, answerLabelWarning) {
     let error = 0;
 
     answersLabels.forEach(label => {
-        if (!label.value) {
-            setLabelBorderWarning(label);
-            error++;
+        if (error < 2) {
+            if (!label.value && (label.placeholder === 'Resposta correta' || label.placeholder.includes('Resposta incorreta 1'))) {
+                setLabelBorderWarning(label);
+                error++;
+            }
         }
     });
 
