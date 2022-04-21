@@ -4,7 +4,9 @@ function submitQuizzBasicInfos() {
   const quizzNumberQuestions = document.getElementById(
     "quizzNumberQuestions"
   ).value;
+
   const quizzNumberLevels = document.getElementById("quizzNumberLevels").value;
+
   if (
     adequateTitle(quizzTitle) &&
     isUrl(quizzImage) &&
@@ -15,12 +17,14 @@ function submitQuizzBasicInfos() {
     document.getElementById("quizzImage").value = "";
     document.getElementById("quizzNumberQuestions").value = "";
     document.getElementById("quizzNumberLevels").value = "";
+
     const quizzObjectRequest = {
-      title: quizzTitle,
-      image: quizzImage,
+      title: quizzTitle.toString(),
+      image: quizzImage.toString(),
       numberQuestions: Number(quizzNumberQuestions),
       numberLevels: Number(quizzNumberLevels),
     };
+
     localStorage.setItem(
       "quizzObjectRequest",
       JSON.stringify(quizzObjectRequest)
