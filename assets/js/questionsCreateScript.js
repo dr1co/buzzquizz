@@ -1,6 +1,6 @@
 function createQuestionsInputs() {
   const quizzObjectRequest = JSON.parse(
-    localStorage.getItem("quizzObjectRequest")
+    localStorage.getItem("quizzConfigObject")
   );
   const questions = document.getElementById("questions");
 
@@ -29,12 +29,14 @@ function questionTemplate(index) {
             <div class="flex flex-direction-column">
               <span class="default-title">Pergunta ${index}</span>
               <input
+              data-question="pergunta${index}"
                 class="default-input-style"
                 type="text"
                 name="question-text"
                 placeholder="Texto da pergunta"
               />
               <input
+              data-question="pergunta${index}"
                 class="default-input-style"
                 type="text"
                 name="question-background-color"
@@ -44,12 +46,14 @@ function questionTemplate(index) {
             <div class="flex flex-direction-column">
               <span class="default-title">Resposta correta</span>
               <input
+              data-question="pergunta${index}"
                 class="default-input-style"
                 type="text"
                 name="answer-label"
                 placeholder="Resposta correta"
               />
               <input
+              data-question="pergunta${index}"
                 class="default-input-style"
                 type="text"
                 name="image-url"
@@ -62,12 +66,14 @@ function questionTemplate(index) {
                 class="incorrect-group-input-margin flex flex-direction-column"
               >
                 <input
+                data-question="pergunta${index}"
                   class="default-input-style"
                   type="text"
                   name="answer-label"
                   placeholder="Resposta incorreta 1"
                 />
                 <input
+                data-question="pergunta${index}"
                   class="default-input-style"
                   type="text"
                   name="image-url"
@@ -78,12 +84,14 @@ function questionTemplate(index) {
                 class="incorrect-group-input-margin flex flex-direction-column"
               >
                 <input
+                data-question="pergunta${index}"
                   class="default-input-style"
                   type="text"
                   name="answer-label"
                   placeholder="Resposta incorreta 2"
                 />
                 <input
+                  data-question="pergunta${index}"
                   class="default-input-style"
                   type="text"
                   name="image-url"
@@ -92,12 +100,14 @@ function questionTemplate(index) {
               </div>
               <div class="flex flex-direction-column">
                 <input
+                  data-question="pergunta${index}"
                   class="default-input-style"
                   type="text"
                   name="answer-label"
                   placeholder="Resposta incorreta 3"
                 />
                 <input
+                  data-question="pergunta${index}"
                   class="default-input-style"
                   type="text"
                   name="image-url"
@@ -170,7 +180,7 @@ function showWarningMessage(labelError) {
 
 function setLabelWarning(label) {
   label.style.borderColor = "#EC362D";
-  label.style.backgroundColor = "#FFE9E9"
+  label.style.backgroundColor = "#FFE9E9";
 }
 
 function verifyAnswersLabels(answersLabels, answerLabelWarning) {

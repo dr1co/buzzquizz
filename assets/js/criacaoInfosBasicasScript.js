@@ -18,7 +18,7 @@ function submitQuizzBasicInfos() {
     document.getElementById("quizzNumberQuestions").value = "";
     document.getElementById("quizzNumberLevels").value = "";
 
-    const quizzObjectRequest = {
+    const quizzConfigObject = {
       title: quizzTitle.toString(),
       image: quizzImage.toString(),
       numberQuestions: Number(quizzNumberQuestions),
@@ -26,8 +26,8 @@ function submitQuizzBasicInfos() {
     };
 
     localStorage.setItem(
-      "quizzObjectRequest",
-      JSON.stringify(quizzObjectRequest)
+      "quizzConfigObject",
+      JSON.stringify(quizzConfigObject)
     );
 
     goToQuestionsCreation();
