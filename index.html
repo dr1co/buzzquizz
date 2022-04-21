@@ -1,92 +1,187 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>BuzzQuizz</title>
-    <link rel="shortcut icon" href="./assets/img/buzzquizz.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="./assets/img/buzzquizz.png"
+      type="image/x-icon"
+    />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- CONTEXT CSS -->
-    <link rel="stylesheet" href="./assets/css/questionsCreateStyle.css">
-    <link rel="stylesheet" href="assets/css/criacaoInfosBasicasStyle.css">
-</head>
-<body>
-<header>
-    <h1 class="header-title">BuzzQuizz</h1>
-</header>
-<main>
-    <section id="criacao-infos-basicas">
-        <h1 class="default-title flex justify-content-center"> Comece pelo começo </h1>
-        <div class="quizz-box flex flex-direction-column justify-content-center align-items-center">
-            <input class="default-input-style" type="text" id="quizzTitle" placeholder="Título do seu quizz">
-            <input class="default-input-style" type="text" id="quizzImage" placeholder="URL da imagem do seu quizz">
-            <input class="default-input-style" type="text" id="quizzNumberQuestions"
-                   placeholder="Quantidade de perguntas do quizz">
-            <input class="default-input-style" type="text" id="quizzNumberLevels"
-                   placeholder="Quantidade de níveis do quizz">
+    <link rel="stylesheet" href="./assets/css/questionsCreateStyle.css" />
+    <link rel="stylesheet" href="assets/css/criacaoInfosBasicasStyle.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="header-title">BuzzQuizz</h1>
+    </header>
+    <main>
+      <section id="criacao-infos-basicas">
+        <h1 class="default-title flex justify-content-center">
+          Comece pelo começo
+        </h1>
+        <div
+          class="quizz-box flex flex-direction-column justify-content-center align-items-center"
+        >
+          <input
+            class="default-input-style"
+            type="text"
+            id="quizzTitle"
+            placeholder="Título do seu quizz"
+          />
+          <input
+            class="default-input-style"
+            type="text"
+            id="quizzImage"
+            placeholder="URL da imagem do seu quizz"
+          />
+          <input
+            class="default-input-style"
+            type="text"
+            id="quizzNumberQuestions"
+            placeholder="Quantidade de perguntas do quizz"
+          />
+          <input
+            class="default-input-style"
+            type="text"
+            id="quizzNumberLevels"
+            placeholder="Quantidade de níveis do quizz"
+          />
         </div>
         <div class="flex justify-content-center">
-            <button class="create-questions-button" onclick="submitQuizzBasicInfos()"> Prosseguir para criar perguntas
-            </button>
+          <button
+            class="create-questions-button"
+            onclick="submitQuizzBasicInfos()"
+          >
+            Prosseguir para criar perguntas
+          </button>
         </div>
-    </section>
+      </section>
 
-    <section id="questions-creation" class="flex flex-direction-column justify-content-center align-items-center">
+      <section
+        id="questions-creation"
+        class="flex flex-direction-column justify-content-center align-items-center"
+      >
         <h3>Crie suas perguntas</h3>
         <div class="question flex flex-direction-column align-items-center">
-            <div class="default-input-group-width flex flex-direction-column">
-                <div class="flex flex-direction-column">
-                    <span class="default-title">Pergunta 1</span>
-                    <input class="default-input-style" type="text" name="question-text" placeholder="Texto da pergunta">
-                    <input class="default-input-style" type="text" name="question-background-color"
-                           placeholder="Cor de fundo da pergunta">
-                </div>
-                <div class="flex flex-direction-column">
-                    <span class="default-title">Resposta correta</span>
-                    <input class="default-input-style" type="text" name="answer-label" placeholder="Resposta correta">
-                    <input class="default-input-style" type="text" name="image-url" placeholder="URL da imagem">
-                </div>
-                <div class="flex flex-direction-column">
-                    <span class="default-title">Respostas incorretas</span>
-                    <div class="incorrect-group-input-margin flex flex-direction-column">
-                        <input class="default-input-style" type="text" name="answer-label"
-                               placeholder="Resposta incorreta 1">
-                        <input class="default-input-style" type="text" name="image-url" placeholder="URL da imagem 1">
-                    </div>
-                    <div class="incorrect-group-input-margin flex flex-direction-column">
-                        <input class="default-input-style" type="text" name="answer-label"
-                               placeholder="Resposta incorreta 2">
-                        <input class="default-input-style" type="text" name="image-url" placeholder="URL da imagem 2">
-                    </div>
-                    <div class="flex flex-direction-column">
-                        <input class="default-input-style" type="text" name="answer-label"
-                               placeholder="Resposta incorreta 3">
-                        <input class="default-input-style" type="text" name="image-url" placeholder="URL da imagem 3">
-                    </div>
-                </div>
+          <div class="default-input-group-width flex flex-direction-column">
+            <div class="flex flex-direction-column">
+              <span class="default-title">Pergunta 1</span>
+              <input
+                class="default-input-style"
+                type="text"
+                name="question-text"
+                placeholder="Texto da pergunta"
+              />
+              <input
+                class="default-input-style"
+                type="text"
+                name="question-background-color"
+                placeholder="Cor de fundo da pergunta"
+              />
             </div>
+            <div class="flex flex-direction-column">
+              <span class="default-title">Resposta correta</span>
+              <input
+                class="default-input-style"
+                type="text"
+                name="answer-label"
+                placeholder="Resposta correta"
+              />
+              <input
+                class="default-input-style"
+                type="text"
+                name="image-url"
+                placeholder="URL da imagem"
+              />
+            </div>
+            <div class="flex flex-direction-column">
+              <span class="default-title">Respostas incorretas</span>
+              <div
+                class="incorrect-group-input-margin flex flex-direction-column"
+              >
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="answer-label"
+                  placeholder="Resposta incorreta 1"
+                />
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="image-url"
+                  placeholder="URL da imagem 1"
+                />
+              </div>
+              <div
+                class="incorrect-group-input-margin flex flex-direction-column"
+              >
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="answer-label"
+                  placeholder="Resposta incorreta 2"
+                />
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="image-url"
+                  placeholder="URL da imagem 2"
+                />
+              </div>
+              <div class="flex flex-direction-column">
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="answer-label"
+                  placeholder="Resposta incorreta 3"
+                />
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="image-url"
+                  placeholder="URL da imagem 3"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div id="answer-label-warning">O texto das respostas destacadas está vazio ou incorreto.</div>
-        <div id="image-url-warning">A URL da imagem das respostas destacadas está vazia ou incorreta.</div>
-        <div id="question-text-warning">O texto das perguntas destacadas está vazio ou incorreto.</div>
-        <div id="question-background-color-warning">A cor de fundo das perguntas destacadas está vazia ou incorreta.
+        <div id="answer-label-warning">
+          O texto das respostas destacadas está vazio ou incorreto.
         </div>
-        <div id="warning">Verifique os pontos apresentados e tente criar seu quizz novamente!</div>
+        <div id="image-url-warning">
+          A URL da imagem das respostas destacadas está vazia ou incorreta.
+        </div>
+        <div id="question-text-warning">
+          O texto das perguntas destacadas está vazio ou incorreto.
+        </div>
+        <div id="question-background-color-warning">
+          A cor de fundo das perguntas destacadas está vazia ou incorreta.
+        </div>
+        <div id="warning">
+          Verifique os pontos apresentados e tente criar seu quizz novamente!
+        </div>
 
-        <button onclick="verifyInputs()" type="button">Prosseguir pra criar níveis</button>
-    </section>
-</main>
+        <button onclick="verifyInputs()" type="button">
+          Prosseguir pra criar níveis
+        </button>
+      </section>
+    </main>
 
-<!-- JS -->
-<script src="./assets/js/script.js"></script>
-<!-- CONTEXT JS -->
-<script src="./assets/js/questionsCreateScript.js"></script>
-<script src="assets/js/criacaoInfosBasicasScript.js"></script>
-
-</body>
+    <!-- JS -->
+    <script src="./assets/js/script.js"></script>
+    <!-- CONTEXT JS -->
+    <script src="./assets/js/questionsCreateScript.js"></script>
+    <script src="assets/js/criacaoInfosBasicasScript.js"></script>
+  </body>
 </html>
