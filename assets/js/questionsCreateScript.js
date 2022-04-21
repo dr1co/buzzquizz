@@ -1,15 +1,25 @@
 function createQuestionsInputs() {
-  const quizzObjectRequest = JSON.parse(localStorage.getItem('quizzObjectRequest'));
-  const questions = document.getElementById('questions');
+  const quizzObjectRequest = JSON.parse(
+    localStorage.getItem("quizzObjectRequest")
+  );
+  const questions = document.getElementById("questions");
 
   for (let i = 1; i <= quizzObjectRequest.numberQuestions; i++) {
     questions.innerHTML += questionTemplate(i);
   }
 }
 
+function openQuestionInputs(el) {
+  console.log(el.id);
+}
+
 function questionTemplate(index) {
   return `<div data-question="pergunta${index}" class="question flex flex-direction-column align-items-center">
-          <div class="default-input-group-width flex flex-direction-column">
+          <div onclick="openQuestionInputs(this)" class="question-label" id="pergunta${index}">
+            <span class="default-title">Pergunta ${index}</span>
+            <img src="./assets/img/question-icon.png" alt="Expandir pergunta">
+          </div> 
+          <div data-question="pergunta${index}" class="default-input-group-width flex flex-direction-column d-none">  
             <div class="flex flex-direction-column">
               <span class="default-title">Pergunta ${index}</span>
               <input
