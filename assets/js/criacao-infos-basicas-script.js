@@ -9,12 +9,13 @@ function submitQuizzBasicInfos() {
         document.getElementById("quizzImage").value = "";
         document.getElementById("quizzNumberQuestions").value = "";
         document.getElementById("quizzNumberLevels").value = "";
-        return {
+        const quizzObjectRequest = {
             title: quizzTitle,
             image: quizzImage,
             numberQuestions: Number(quizzNumberQuestions),
             numberLevels: Number(quizzNumberLevels),
-        }
+        };
+        localStorage.setItem("quizzObjectRequest", JSON.stringify(quizzObjectRequest));
     }
     else
     {
