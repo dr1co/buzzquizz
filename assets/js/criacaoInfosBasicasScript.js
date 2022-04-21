@@ -29,6 +29,8 @@ function submitQuizzBasicInfos() {
       "quizzObjectRequest",
       JSON.stringify(quizzObjectRequest)
     );
+
+    goToQuestionsCreation();
   } else {
     alert(`Atenção, preencha corretamente os campos abaixo:
 Título do quizz: deve ter entre 20 a 65 caracteres
@@ -36,6 +38,14 @@ URL da imagem: deve ser uma URL válida
 Quantidade de perguntas do quizz: pelo menos 3
 Quantidade de níveis do quizz: pelo menos 2`);
   }
+}
+
+function goToQuestionsCreation() {
+  const criacaoInfosBasicas = document.getElementById("criacao-infos-basicas");
+  const questionsCreation = document.getElementById("questions-creation");
+
+  criacaoInfosBasicas.style.display = "none";
+  questionsCreation.style.display = "block";
 }
 
 function adequateTitle(title) {
