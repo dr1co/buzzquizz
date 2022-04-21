@@ -2,7 +2,7 @@ function createQuestionsInputs() {
   const quizzObjectRequest = JSON.parse(localStorage.getItem('quizzObjectRequest'));
   const questions = document.getElementById('questions');
 
-  for (let i = 0; i < quizzObjectRequest.numberQuestions; i++) {
+  for (let i = 1; i <= quizzObjectRequest.numberQuestions; i++) {
     questions.innerHTML += questionTemplate(i);
   }
 }
