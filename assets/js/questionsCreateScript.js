@@ -9,6 +9,65 @@ function createQuestionsInputs() {
   }
 }
 
+function saveObjectData() {
+  const quizzObjectRequest = JSON.parse(
+    localStorage.getItem("quizzConfigObject")
+  );
+
+  const generalQuestionsInfo = document.querySelectorAll(
+    ".general-question-info"
+  );
+  const correctQuestionAnwswers = document.querySelectorAll(".correct-anwswer");
+  const incorrectQuestionAnswers = document.querySelectorAll(
+    ".incorrect-answers .incorrect-item"
+  );
+
+  const questions = [];
+
+  generalQuestionsInfo.forEach((info) => {
+    const obj = {};
+    obj[info.childNodes[3].dataset.question] = {
+      title: info.childNodes[3].value,
+      image: info.childNodes[5].value,
+      answers: []
+    };
+
+    questions.push(obj);
+  });
+
+  const answers = [];
+  correctQuestionAnwswers.forEach((correct) => {
+    const obj = {};
+    obj[correct.childNodes[3].dataset.question] = {
+      text: correct.childNodes[3].value,
+      image: correct.childNodes[5].value,
+      isCorrectAnswer: true,
+    };
+
+    answers.push(obj);
+  });
+
+  incorrectQuestionAnswers.forEach((incorrect) => {
+    const obj = {};
+    obj[incorrect.childNodes[1].dataset.question] = {
+      text: incorrect.childNodes[1].value,
+      image: incorrect.childNodes[3].value,
+      isCorrectAnswer: false,
+    };
+
+    answers.push(obj);
+  });
+
+  for (const question of questions) {
+    for (const answer of answers) {
+      if (Object.getOwnPropertyNames(answer)[0] === Object.getOwnPropertyNames(question)[0]) {
+        question[Object.getOwnPropertyNames(question)[0]].answers.push(answer);
+      }
+    }
+  }
+  console.log(questions);
+}
+
 function openQuestionInputs(el) {
   el.classList.add("d-none");
   const questions = document.querySelectorAll("[data-question]");
@@ -26,7 +85,7 @@ function questionTemplate(index) {
             <img src="./assets/img/question-icon.png" alt="Expandir pergunta">
           </div> 
           <div data-question="pergunta${index}" class="default-input-group-width flex flex-direction-column d-none">  
-            <div class="flex flex-direction-column">
+            <div data-question="pergunta${index}" class="general-question-info flex flex-direction-column">
               <span class="default-title">Pergunta ${index}</span>
               <input
               data-question="pergunta${index}"
@@ -43,7 +102,7 @@ function questionTemplate(index) {
                 placeholder="Cor de fundo da pergunta"
               />
             </div>
-            <div class="flex flex-direction-column">
+            <div data-question="pergunta${index}" class="correct-anwswer flex flex-direction-column">
               <span class="default-title">Resposta correta</span>
               <input
               data-question="pergunta${index}"
@@ -60,10 +119,10 @@ function questionTemplate(index) {
                 placeholder="URL da imagem"
               />
             </div>
-            <div class="flex flex-direction-column">
+            <div data-question="pergunta${index}" class="incorrect-answers flex flex-direction-column">
               <span class="default-title">Respostas incorretas</span>
               <div
-                class="incorrect-group-input-margin flex flex-direction-column"
+                class="incorrect-item incorrect-group-input-margin flex flex-direction-column"
               >
                 <input
                 data-question="pergunta${index}"
@@ -81,7 +140,7 @@ function questionTemplate(index) {
                 />
               </div>
               <div
-                class="incorrect-group-input-margin flex flex-direction-column"
+                class="incorrect-item incorrect-group-input-margin flex flex-direction-column"
               >
                 <input
                 data-question="pergunta${index}"
@@ -98,7 +157,7 @@ function questionTemplate(index) {
                   placeholder="URL da imagem 2"
                 />
               </div>
-              <div class="flex flex-direction-column">
+              <div class="incorrect-item flex flex-direction-column">
                 <input
                   data-question="pergunta${index}"
                   class="default-input-style"
@@ -151,14 +210,16 @@ function verifyInputs() {
   resetVerify(allInputs, warnings);
 
   try {
-    verifyQuestionsText(questionsText, questionTextWarning);
-    verifyQuestionsBackgroundColor(
-      questionsBackgroundColor,
-      questionBackgroundColorWarning
-    );
-    verifyAnswersLabels(answersLabels, answerLabelWarning);
-    verifyImagesUrl(imagesUrl, imagesUrlWarning);
+    // verifyQuestionsText(questionsText, questionTextWarning);
+    // verifyQuestionsBackgroundColor(
+    //   questionsBackgroundColor,
+    //   questionBackgroundColorWarning
+    // );
+    // verifyAnswersLabels(answersLabels, answerLabelWarning);
+    // verifyImagesUrl(imagesUrl, imagesUrlWarning);
+    saveObjectData();
   } catch (e) {
+    console.log(e)
     showWarningMessage(generalWarning);
   }
 }
