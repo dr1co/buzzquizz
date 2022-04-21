@@ -10,7 +10,13 @@ function createQuestionsInputs() {
 }
 
 function openQuestionInputs(el) {
-  console.log(el.id);
+  el.classList.add('d-none');
+  const questions = document.querySelectorAll('[data-question]');
+  questions.forEach(question => {
+    if (question.dataset.question === el.id) {
+      question.classList.remove('d-none');
+    }
+  })
 }
 
 function questionTemplate(index) {
