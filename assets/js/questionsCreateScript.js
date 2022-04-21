@@ -10,13 +10,13 @@ function createQuestionsInputs() {
 }
 
 function openQuestionInputs(el) {
-  el.classList.add('d-none');
-  const questions = document.querySelectorAll('[data-question]');
-  questions.forEach(question => {
+  el.classList.add("d-none");
+  const questions = document.querySelectorAll("[data-question]");
+  questions.forEach((question) => {
     if (question.dataset.question === el.id) {
-      question.classList.remove('d-none');
+      question.classList.remove("d-none");
     }
-  })
+  });
 }
 
 function questionTemplate(index) {
@@ -156,6 +156,7 @@ function verifyInputs() {
 function resetVerify(allInputs, warnings) {
   allInputs.forEach((el) => {
     el.style.borderColor = "#D1D1D1";
+    el.style.backgroundColor = "#FFFFFF";
   });
 
   warnings.forEach((warning) => {
@@ -167,8 +168,9 @@ function showWarningMessage(labelError) {
   labelError.style.display = "block";
 }
 
-function setLabelBorderWarning(label) {
+function setLabelWarning(label) {
   label.style.borderColor = "#EC362D";
+  label.style.backgroundColor = "#FFE9E9"
 }
 
 function verifyAnswersLabels(answersLabels, answerLabelWarning) {
@@ -181,7 +183,7 @@ function verifyAnswersLabels(answersLabels, answerLabelWarning) {
         (label.placeholder === "Resposta correta" ||
           label.placeholder.includes("Resposta incorreta 1"))
       ) {
-        setLabelBorderWarning(label);
+        setLabelWarning(label);
         error++;
       }
     }
@@ -198,7 +200,7 @@ function verifyQuestionsText(questionsText, questionTextWarning) {
 
   questionsText.forEach((label) => {
     if (label.value.length < 20) {
-      setLabelBorderWarning(label);
+      setLabelWarning(label);
       error++;
     }
   });
@@ -218,7 +220,7 @@ function verifyQuestionsBackgroundColor(
 
   questionsBackgroundColor.forEach((label) => {
     if (label.value.search(regex) < 0) {
-      setLabelBorderWarning(label);
+      setLabelWarning(label);
       error++;
     }
   });
@@ -236,7 +238,7 @@ function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
 
   imagesUrl.forEach((label) => {
     if (label.value.search(regex) < 0) {
-      setLabelBorderWarning(label);
+      setLabelWarning(label);
       error++;
     }
   });
