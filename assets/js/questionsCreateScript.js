@@ -1,3 +1,98 @@
+function createQuestionsInputs() {
+  const quizzObjectRequest = JSON.parse(localStorage.getItem('quizzObjectRequest'));
+  const questions = document.getElementById('questions');
+
+  for (let i = 0; i < quizzObjectRequest.numberQuestions; i++) {
+    questions.innerHTML += questionTemplate(i);
+  }
+}
+
+function questionTemplate(index) {
+  return `<div data-question="pergunta${index}" class="question flex flex-direction-column align-items-center">
+          <div class="default-input-group-width flex flex-direction-column">
+            <div class="flex flex-direction-column">
+              <span class="default-title">Pergunta ${index}</span>
+              <input
+                class="default-input-style"
+                type="text"
+                name="question-text"
+                placeholder="Texto da pergunta"
+              />
+              <input
+                class="default-input-style"
+                type="text"
+                name="question-background-color"
+                placeholder="Cor de fundo da pergunta"
+              />
+            </div>
+            <div class="flex flex-direction-column">
+              <span class="default-title">Resposta correta</span>
+              <input
+                class="default-input-style"
+                type="text"
+                name="answer-label"
+                placeholder="Resposta correta"
+              />
+              <input
+                class="default-input-style"
+                type="text"
+                name="image-url"
+                placeholder="URL da imagem"
+              />
+            </div>
+            <div class="flex flex-direction-column">
+              <span class="default-title">Respostas incorretas</span>
+              <div
+                class="incorrect-group-input-margin flex flex-direction-column"
+              >
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="answer-label"
+                  placeholder="Resposta incorreta 1"
+                />
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="image-url"
+                  placeholder="URL da imagem 1"
+                />
+              </div>
+              <div
+                class="incorrect-group-input-margin flex flex-direction-column"
+              >
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="answer-label"
+                  placeholder="Resposta incorreta 2"
+                />
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="image-url"
+                  placeholder="URL da imagem 2"
+                />
+              </div>
+              <div class="flex flex-direction-column">
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="answer-label"
+                  placeholder="Resposta incorreta 3"
+                />
+                <input
+                  class="default-input-style"
+                  type="text"
+                  name="image-url"
+                  placeholder="URL da imagem 3"
+                />
+              </div>
+            </div>
+          </div>
+        </div>`;
+}
+
 function verifyInputs() {
   const answersLabels = document.getElementsByName("answer-label");
   const questionsText = document.getElementsByName("question-text");

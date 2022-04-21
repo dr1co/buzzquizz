@@ -41,11 +41,13 @@ Quantidade de níveis do quizz: pelo menos 2`);
 }
 
 function goToQuestionsCreation() {
+  createQuestionsInputs();
+
   const criacaoInfosBasicas = document.getElementById("criacao-infos-basicas");
   const questionsCreation = document.getElementById("questions-creation");
 
   criacaoInfosBasicas.style.display = "none";
-  questionsCreation.style.display = "block";
+  questionsCreation.style.display = "flex";
 }
 
 function adequateTitle(title) {
