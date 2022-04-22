@@ -61,7 +61,11 @@ function saveObjectData() {
   for (const question of questions) {
     for (const answer of answers) {
       if (Object.getOwnPropertyNames(answer)[0] === Object.getOwnPropertyNames(question)[0]) {
-        question[Object.getOwnPropertyNames(question)[0]].answers.push(answer);
+        for (const answerKey in answer) {
+          if (answer[answerKey].text) {
+            question[Object.getOwnPropertyNames(question)[0]].answers.push(answer[answerKey]);
+          }
+        }
       }
     }
   }
@@ -78,8 +82,7 @@ function saveObjectData() {
     }
   })
 
-  console.log(quizzObjectCreationRequest);
-
+  localStorage.setItem('quizzObjectCreationRequest', JSON.stringify(quizzObjectCreationRequest));
 }
 
 function openQuestionInputs(el) {
@@ -224,16 +227,15 @@ function verifyInputs() {
   resetVerify(allInputs, warnings);
 
   try {
-    // verifyQuestionsText(questionsText, questionTextWarning);
-    // verifyQuestionsBackgroundColor(
-    //   questionsBackgroundColor,
-    //   questionBackgroundColorWarning
-    // );
-    // verifyAnswersLabels(answersLabels, answerLabelWarning);
-    // verifyImagesUrl(imagesUrl, imagesUrlWarning);
+    verifyQuestionsText(questionsText, questionTextWarning);
+    verifyQuestionsBackgroundColor(
+      questionsBackgroundColor,
+      questionBackgroundColorWarning
+    );
+    verifyAnswersLabels(answersLabels, answerLabelWarning);
+    verifyImagesUrl(imagesUrl, imagesUrlWarning);
     saveObjectData();
   } catch (e) {
-    console.log(e)
     showWarningMessage(generalWarning);
   }
 }
@@ -322,9 +324,11 @@ function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
   imagesUrl.forEach((label) => {
-    if (label.value.search(regex) < 0) {
-      setLabelWarning(label);
-      error++;
+    if (error < 2) {
+      if (label.value.search(regex) < 0 && label.value) {
+        setLabelWarning(label);
+        error++;
+      }
     }
   });
 
