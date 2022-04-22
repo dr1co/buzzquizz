@@ -243,9 +243,20 @@ function verifyInputs() {
     verifyAnswersLabels(answersLabels, answerLabelWarning);
     verifyImagesUrl(imagesUrl, imagesUrlWarning);
     saveObjectData();
+    goToLevelsCreation()
   } catch (e) {
     showWarningMessage(generalWarning);
   }
+}
+
+function goToLevelsCreation() {
+  createLevelsInputs();
+
+  const questionsCreation = document.getElementById("questions-creation");
+  const levelsCreation = document.getElementById("levels-creation");
+
+  questionsCreation.style.display = "none";
+  levelsCreation.style.display = "flex";
 }
 
 function resetVerify(allInputs, warnings) {
