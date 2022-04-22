@@ -1,8 +1,8 @@
 const quizzBasicInfos = JSON.parse(localStorage.getItem("quizzObjectRequest"))
 
 function setBasicInfos() {
-    document.querySelector(".quizz-image").style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${quizzBasicInfos.image}")`;
-    document.querySelector(".quizz-image p").innerHTML = `${quizzBasicInfos.title}`;
+    document.querySelector(".quizz-image").src = `${quizzBasicInfos.image}`;
+    document.querySelector(".image-background p").innerHTML = `${quizzBasicInfos.title}`;
 }
 
 function viewQuizz() {
