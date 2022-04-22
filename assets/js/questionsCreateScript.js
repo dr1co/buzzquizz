@@ -65,7 +65,21 @@ function saveObjectData() {
       }
     }
   }
-  console.log(questions);
+
+  const quizzObjectCreationRequest = {
+    title: quizzObjectRequest.title,
+    image: quizzObjectRequest.image,
+    questions: []
+  };
+
+  questions.forEach((question) => {
+    for (const questionKey in question) {
+      quizzObjectCreationRequest.questions.push(question[questionKey]);
+    }
+  })
+
+  console.log(quizzObjectCreationRequest);
+
 }
 
 function openQuestionInputs(el) {
