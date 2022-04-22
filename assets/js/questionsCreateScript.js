@@ -29,7 +29,7 @@ function saveObjectData() {
     obj[info.childNodes[3].dataset.question] = {
       title: info.childNodes[3].value,
       image: info.childNodes[5].value,
-      answers: []
+      answers: [],
     };
 
     questions.push(obj);
@@ -60,10 +60,15 @@ function saveObjectData() {
 
   for (const question of questions) {
     for (const answer of answers) {
-      if (Object.getOwnPropertyNames(answer)[0] === Object.getOwnPropertyNames(question)[0]) {
+      if (
+        Object.getOwnPropertyNames(answer)[0] ===
+        Object.getOwnPropertyNames(question)[0]
+      ) {
         for (const answerKey in answer) {
           if (answer[answerKey].text) {
-            question[Object.getOwnPropertyNames(question)[0]].answers.push(answer[answerKey]);
+            question[Object.getOwnPropertyNames(question)[0]].answers.push(
+              answer[answerKey]
+            );
           }
         }
       }
@@ -73,16 +78,19 @@ function saveObjectData() {
   const quizzObjectCreationRequest = {
     title: quizzObjectRequest.title,
     image: quizzObjectRequest.image,
-    questions: []
+    questions: [],
   };
 
   questions.forEach((question) => {
     for (const questionKey in question) {
       quizzObjectCreationRequest.questions.push(question[questionKey]);
     }
-  })
+  });
 
-  localStorage.setItem('quizzObjectCreationRequest', JSON.stringify(quizzObjectCreationRequest));
+  localStorage.setItem(
+    "quizzObjectCreationRequest",
+    JSON.stringify(quizzObjectCreationRequest)
+  );
 }
 
 function openQuestionInputs(el) {
