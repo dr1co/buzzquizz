@@ -1,0 +1,47 @@
+#levels-creation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#levels-creation h3 {
+    margin-top: 63px;
+    margin-bottom: 36px;
+}
+
+#levels {
+    width: 600px;
+}
+
+.level {
+    width: 100%;
+    height: 316px;
+    background: #FFF;
+    margin-bottom: 22px;
+}
+
+.level .default-title {
+    display: block;
+    margin-left: 17px;
+}
+
+.inputs {
+    min-width: 100%;
+}
+
+.inputs .default-input-style {
+    width: 100%;
+}
+
+#levels-creation button {
+    width: 323px;
+    height: 54px;
+    margin-top: calc(75px - 22px);
+    background: #ec362d;
+    border-radius: 15px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    color: #fff5f4;
+    cursor: pointer;
+}
