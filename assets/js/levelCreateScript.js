@@ -1,4 +1,4 @@
-function getInputsAndVerify() {
+async function getInputsAndVerify() {
   const levelTitles = document.getElementsByName("level-title");
   const levelAccurates = document.getElementsByName("level-accurate");
   const levelImages = document.getElementsByName("level-image");
@@ -19,7 +19,7 @@ function getInputsAndVerify() {
     verifyLevelImagesUrl(levelImages);
     verifyDescriptions(levelDescriptions);
 
-    saveLevelData();
+    await saveLevelData();
   } catch (e) {
     console.log(e);
   }
@@ -124,11 +124,11 @@ function showInputWarnings(elClasseName) {
   })
 }
 
-function saveLevelData() {
+async function saveLevelData() {
   const inputs = document.querySelectorAll("[data-level].inputs");
 
   const quizzObjectCreationRequest = JSON.parse(
-    localStorage.getItem("quizzObjectCreationRequest")
+      localStorage.getItem("quizzObjectCreationRequest")
   );
 
   const levels = [];
@@ -146,10 +146,14 @@ function saveLevelData() {
 
   quizzObjectCreationRequest.levels = levels;
 
+  console.log(quizzObjectCreationRequest)
+
   localStorage.setItem(
-    "quizzObjectCreationRequest",
-    JSON.stringify(quizzObjectCreationRequest)
+      "quizzObjectCreationRequest",
+      JSON.stringify(quizzObjectCreationRequest)
   );
+
+  await createQuizzRequest();
 }
 
 function createLevelsInputs() {
