@@ -134,19 +134,18 @@ async function saveLevelData() {
   const levels = [];
 
   inputs.forEach((input) => {
+    console.log(input.childNodes);
     const obj = {
       title: input.childNodes[1].value,
-      minValue: input.childNodes[3].value,
-      image: input.childNodes[5].value,
-      text: input.childNodes[7].value,
+      minValue: input.childNodes[5].value,
+      image: input.childNodes[9].value,
+      text: input.childNodes[13].value,
     };
 
     levels.push(obj);
   });
 
   quizzObjectCreationRequest.levels = levels;
-
-  console.log(quizzObjectCreationRequest)
 
   localStorage.setItem(
       "quizzObjectCreationRequest",
