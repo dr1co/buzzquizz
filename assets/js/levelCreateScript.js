@@ -4,6 +4,15 @@ function getInputsAndVerify() {
   const levelImages = document.getElementsByName("level-image");
   const levelDescriptions = document.getElementsByName("level-description");
 
+  const allInputs = [
+    ...levelTitles,
+    ...levelAccurates,
+    ...levelImages,
+    ...levelDescriptions,
+  ];
+
+  resetAllVerifications(allInputs);
+
   try {
     verifyTitles(levelTitles);
     verifyMinValue(levelAccurates);
@@ -14,6 +23,13 @@ function getInputsAndVerify() {
   } catch (e) {
     console.log(e);
   }
+}
+
+function resetAllVerifications(allInputs) {
+  allInputs.forEach((input) => {
+    input.style.borderColor = "#D1D1D1";
+    input.style.backgroundColor = "#FFFFFF";
+  });
 }
 
 function verifyTitles(levelTitles) {
