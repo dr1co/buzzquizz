@@ -344,7 +344,7 @@ function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
 
   imagesUrl.forEach((label) => {
     if (error < 2) {
-      if (label.value.search(regex) < 0 && label.value) {
+      if (label.value.search(regex) < 0 || !label.value) {
         setLabelWarning(label);
         error++;
       }

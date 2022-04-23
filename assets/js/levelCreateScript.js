@@ -1,33 +1,87 @@
 function getInputsAndVerify() {
-  const levelTitles = document.getElementsByName('level-title');
-  const levelAccurates = document.getElementsByName('level-accurate');
-  const levelImages = document.getElementsByName('level-image');
-  const levelDescriptions = document.getElementsByName('level-description');
+  const levelTitles = document.getElementsByName("level-title");
+  const levelAccurates = document.getElementsByName("level-accurate");
+  const levelImages = document.getElementsByName("level-image");
+  const levelDescriptions = document.getElementsByName("level-description");
+
+  verifyTitles(levelTitles);
+  verifyMinValue(levelAccurates);
+  verifyImagesUrl(levelImages);
+  verifyDescriptions(levelDescriptions);
 
   saveLevelData();
 }
 
-function saveLevelData() {
-  const inputs = document.querySelectorAll('[data-level].inputs');
+function verifyTitles(levelTitles) {
+  levelTitles.forEach((title) => {
+    if (title.value.length < 10) {
+      setLabelWarning(title);
 
-  const quizzObjectCreationRequest = JSON.parse(localStorage.getItem('quizzObjectCreationRequest'));
+      throw new Error();
+    }
+  });
+}
+
+function verifyMinValue(levelAccurates) {
+  levelAccurates.forEach((accurate) => {
+    if (
+      !accurate.value ||
+      Number(accurate.value) < 0 ||
+      Number(accurate.value) > 100
+    ) {
+      setLabelWarning(accurate);
+
+      throw new Error();
+    }
+  });
+}
+
+function verifyImagesUrl(levelImages) {
+  const regex =
+    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+  levelImages.forEach((url) => {
+    if (url.value.search(regex) < 0 || !url.value) {
+      setLabelWarning(url);
+    }
+  });
+}
+
+function verifyDescriptions(levelDescriptions) {
+  levelDescriptions.forEach(description => {
+    if (description.value.length < 30) {
+      setLabelWarning(description);
+
+      throw new Error();
+    }
+  })
+}
+
+function saveLevelData() {
+  const inputs = document.querySelectorAll("[data-level].inputs");
+
+  const quizzObjectCreationRequest = JSON.parse(
+    localStorage.getItem("quizzObjectCreationRequest")
+  );
 
   const levels = [];
 
-  inputs.forEach(input => {
+  inputs.forEach((input) => {
     const obj = {
       title: input.childNodes[1].value,
       minValue: input.childNodes[3].value,
       image: input.childNodes[5].value,
-      text: input.childNodes[7].value
+      text: input.childNodes[7].value,
     };
 
     levels.push(obj);
-  })
+  });
 
   quizzObjectCreationRequest.levels = levels;
 
-  localStorage.setItem('quizzObjectCreationRequest', JSON.stringify(quizzObjectCreationRequest));
+  localStorage.setItem(
+    "quizzObjectCreationRequest",
+    JSON.stringify(quizzObjectCreationRequest)
+  );
 }
 
 function createLevelsInputs() {

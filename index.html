@@ -100,7 +100,17 @@
 
       <section id="levels-creation">
           <h3 class="flex justify-content-center">Agora, decida os níveis</h3>
-          <div id="levels"></div>
+          <div id="levels">
+            <div class="level">
+              <span class="default-title">Nível ${levelIndex}</span>
+              <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center align-items-center">
+                <input data-level="nivel${levelIndex}" class="default-input-style" name="level-title" type="text" placeholder="Título do nível">
+                <input data-level="nivel${levelIndex}" class="default-input-style" name="level-accurate" type="text" placeholder="% de acerto mínima">
+                <input data-level="nivel${levelIndex}" class="default-input-style" name="level-image" type="text" placeholder="URL da imagem do nível">
+                <input data-level="nivel${levelIndex}" class="default-input-style" name="level-description" type="text" placeholder="Descrição do nível">
+              </div>
+            </div>
+          </div>
           <button onclick="getInputsAndVerify()">Finalizar Quizz</button>
       </section>
     </main>
