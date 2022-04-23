@@ -28,7 +28,7 @@ function saveObjectData() {
     const obj = {};
     obj[info.childNodes[3].dataset.question] = {
       title: info.childNodes[3].value,
-      image: info.childNodes[5].value,
+      color: info.childNodes[5].value,
       answers: [],
     };
 
