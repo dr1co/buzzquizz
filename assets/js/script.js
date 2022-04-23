@@ -7,7 +7,7 @@ async function createQuizzRequest() {
     quizzObjectCreationRequest
   );
 
-  localStorage.setItem(`quizz:${data.id}`, data);
+  localStorage.setItem(`quizz:${data.id}`, JSON.stringify(data));
 
   return data;
 }
