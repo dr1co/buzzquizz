@@ -4,62 +4,26 @@ function getInputsAndVerify() {
   const levelImages = document.getElementsByName('level-image');
   const levelDescriptions = document.getElementsByName('level-description');
 
-  saveLevelData(levelTitles, levelAccurates, levelImages, levelDescriptions);
+  saveLevelData();
 }
 
-function saveLevelData(levelTitles, levelAccurates, levelImages, levelDescriptions) {
-  const attributes = [];
-
-  levelTitles.forEach(title => {
-    const obj = {};
-
-    obj[title.dataset.level] = {
-      title: title.value,
-    }
-
-    attributes.push(obj);
-  });
-
-  levelAccurates.forEach(accurate => {
-    const obj = {};
-
-    obj[accurate.dataset.level] = {
-      minValue: accurate.value,
-    }
-
-    attributes.push(obj);
-  });
-
-  levelImages.forEach(image => {
-    const obj = {};
-
-    obj[image.dataset.level] = {
-      image: image.value,
-    }
-
-    attributes.push(obj);
-  });
-
-  levelDescriptions.forEach(description => {
-    const obj = {};
-
-    obj[description.dataset.level] = {
-      description: description.value,
-    }
-
-    attributes.push(obj);
-  });
+function saveLevelData() {
+  const inputs = document.querySelectorAll('[data-level].inputs');
 
   const levels = [];
-  const obj = {};
 
-  attributes.forEach(level => {
-    for (const levelKey in level) {
-      Object.assign(obj, level[levelKey]);
-    }
+  inputs.forEach(input => {
+    const obj = {
+      title: input.childNodes[1].value,
+      minValue: input.childNodes[3].value,
+      image: input.childNodes[5].value,
+      text: input.childNodes[7].value
+    };
+
+    levels.push(obj);
   })
 
-  levels.push(obj);
+  console.log(levels);
 }
 
 function createLevelsInputs() {
