@@ -1,3 +1,67 @@
+function getInputsAndVerify() {
+  const levelTitles = document.getElementsByName('level-title');
+  const levelAccurates = document.getElementsByName('level-accurate');
+  const levelImages = document.getElementsByName('level-image');
+  const levelDescriptions = document.getElementsByName('level-description');
+
+  saveLevelData(levelTitles, levelAccurates, levelImages, levelDescriptions);
+}
+
+function saveLevelData(levelTitles, levelAccurates, levelImages, levelDescriptions) {
+  const attributes = [];
+
+  levelTitles.forEach(title => {
+    const obj = {};
+
+    obj[title.dataset.level] = {
+      title: title.value,
+    }
+
+    attributes.push(obj);
+  });
+
+  levelAccurates.forEach(accurate => {
+    const obj = {};
+
+    obj[accurate.dataset.level] = {
+      minValue: accurate.value,
+    }
+
+    attributes.push(obj);
+  });
+
+  levelImages.forEach(image => {
+    const obj = {};
+
+    obj[image.dataset.level] = {
+      image: image.value,
+    }
+
+    attributes.push(obj);
+  });
+
+  levelDescriptions.forEach(description => {
+    const obj = {};
+
+    obj[description.dataset.level] = {
+      description: description.value,
+    }
+
+    attributes.push(obj);
+  });
+
+  const levels = [];
+  const obj = {};
+
+  attributes.forEach(level => {
+    for (const levelKey in level) {
+      Object.assign(obj, level[levelKey]);
+    }
+  })
+
+  levels.push(obj);
+}
+
 function createLevelsInputs() {
   const { numberLevels } = JSON.parse(
     localStorage.getItem("quizzConfigObject")
