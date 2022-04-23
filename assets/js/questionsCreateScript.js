@@ -241,7 +241,7 @@ function verifyInputs() {
       questionBackgroundColorWarning
     );
     verifyAnswersLabels(answersLabels, answerLabelWarning);
-    verifyImagesUrl(imagesUrl, imagesUrlWarning);
+    verifyQuestionImagesUrl(imagesUrl, imagesUrlWarning);
     saveObjectData();
     goToLevelsCreation()
   } catch (e) {
@@ -337,7 +337,7 @@ function verifyQuestionsBackgroundColor(
   }
 }
 
-function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
+function verifyQuestionImagesUrl(imagesUrl, imagesUrlWarning) {
   let error = 0;
   const regex =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
@@ -351,7 +351,7 @@ function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
     }
   });
 
-  if (error > 0) {
+  if (error > 2) {
     showWarningMessage(imagesUrlWarning);
     throw new Error();
   }

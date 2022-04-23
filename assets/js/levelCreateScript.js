@@ -16,7 +16,7 @@ function getInputsAndVerify() {
   try {
     verifyTitles(levelTitles);
     verifyMinValue(levelAccurates);
-    verifyImagesUrl(levelImages);
+    verifyLevelImagesUrl(levelImages);
     verifyDescriptions(levelDescriptions);
 
     saveLevelData();
@@ -39,18 +39,23 @@ function resetAllVerifications(allInputs) {
 }
 
 function verifyTitles(levelTitles) {
+  let error = 0;
   levelTitles.forEach((title) => {
     if (title.value.length < 10) {
       setLabelWarning(title);
       showInputWarnings(title.name);
-
-      throw new Error();
+      error++;
     }
   });
+
+  if (error > 0) {
+    throw new Error();
+  }
 }
 
 function verifyMinValue(levelAccurates) {
   let count = 0;
+  let error = 0;
 
   levelAccurates.forEach((accurate) => {
     if (
@@ -60,8 +65,7 @@ function verifyMinValue(levelAccurates) {
     ) {
       setLabelWarning(accurate);
       showInputWarnings(accurate.name);
-
-      throw new Error();
+      error++;
     }
     if (Number(accurate.value) === 0) {
       count++;
@@ -75,30 +79,42 @@ function verifyMinValue(levelAccurates) {
     });
     throw new Error();
   }
+
+  if (error > 0) {
+    throw new Error();
+  }
 }
 
-function verifyImagesUrl(levelImages) {
+function verifyLevelImagesUrl(levelImages) {
+  let error = 0;
   const regex =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   levelImages.forEach((url) => {
     if (url.value.search(regex) < 0 || !url.value) {
       setLabelWarning(url);
       showInputWarnings(url.name);
-
-      throw new Error();
+      error++;
     }
   });
+
+  if (error > 0) {
+    throw new Error();
+  }
 }
 
 function verifyDescriptions(levelDescriptions) {
+  let error = 0;
   levelDescriptions.forEach((description) => {
     if (description.value.length < 30) {
       setLabelWarning(description);
       showInputWarnings(description.name);
-
-      throw new Error();
+      error++;
     }
   });
+
+  if (error > 0) {
+    throw new Error();
+  }
 }
 
 function showInputWarnings(elClasseName) {
@@ -151,7 +167,7 @@ function createLevelsInputs() {
 function levelTemplate(levelIndex) {
   return `<div class="level">
              <span class="default-title">Nível ${levelIndex}</span>
-             <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center align-items-center">
+             <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center">
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-title" type="text" placeholder="Título do nível">
              <small class="level-title">O título do nível deve ter pelo menos 10 caracteres</small>
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-accurate" type="text" placeholder="% de acerto mínima">
