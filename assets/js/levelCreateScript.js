@@ -10,6 +10,8 @@ function getInputsAndVerify() {
 function saveLevelData() {
   const inputs = document.querySelectorAll('[data-level].inputs');
 
+  const quizzObjectCreationRequest = JSON.parse(localStorage.getItem('quizzObjectCreationRequest'));
+
   const levels = [];
 
   inputs.forEach(input => {
@@ -23,7 +25,9 @@ function saveLevelData() {
     levels.push(obj);
   })
 
-  console.log(levels);
+  quizzObjectCreationRequest.levels = levels;
+
+  localStorage.setItem('quizzObjectCreationRequest', JSON.stringify(quizzObjectCreationRequest));
 }
 
 function createLevelsInputs() {
