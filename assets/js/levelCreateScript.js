@@ -4,12 +4,16 @@ function getInputsAndVerify() {
   const levelImages = document.getElementsByName("level-image");
   const levelDescriptions = document.getElementsByName("level-description");
 
-  verifyTitles(levelTitles);
-  verifyMinValue(levelAccurates);
-  verifyImagesUrl(levelImages);
-  verifyDescriptions(levelDescriptions);
+  try {
+    verifyTitles(levelTitles);
+    verifyMinValue(levelAccurates);
+    verifyImagesUrl(levelImages);
+    verifyDescriptions(levelDescriptions);
 
-  saveLevelData();
+    saveLevelData();
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function verifyTitles(levelTitles) {
@@ -23,6 +27,8 @@ function verifyTitles(levelTitles) {
 }
 
 function verifyMinValue(levelAccurates) {
+  let count = 0;
+
   levelAccurates.forEach((accurate) => {
     if (
       !accurate.value ||
@@ -33,7 +39,17 @@ function verifyMinValue(levelAccurates) {
 
       throw new Error();
     }
+    if (Number(accurate.value) === 0) {
+      count++;
+    }
   });
+
+  if (count === 0) {
+    levelAccurates.forEach((accurate) => {
+      setLabelWarning(accurate);
+    });
+    throw new Error();
+  }
 }
 
 function verifyImagesUrl(levelImages) {
@@ -47,13 +63,13 @@ function verifyImagesUrl(levelImages) {
 }
 
 function verifyDescriptions(levelDescriptions) {
-  levelDescriptions.forEach(description => {
+  levelDescriptions.forEach((description) => {
     if (description.value.length < 30) {
       setLabelWarning(description);
 
       throw new Error();
     }
-  })
+  });
 }
 
 function saveLevelData() {
