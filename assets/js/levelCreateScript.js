@@ -29,6 +29,12 @@ function resetAllVerifications(allInputs) {
   allInputs.forEach((input) => {
     input.style.borderColor = "#D1D1D1";
     input.style.backgroundColor = "#FFFFFF";
+
+    const warnings = document.querySelectorAll(`.${input.name}`);
+
+    warnings.forEach(warning => {
+      warning.style.display = 'none';
+    })
   });
 }
 
@@ -36,6 +42,7 @@ function verifyTitles(levelTitles) {
   levelTitles.forEach((title) => {
     if (title.value.length < 10) {
       setLabelWarning(title);
+      showInputWarnings(title.name);
 
       throw new Error();
     }
@@ -52,6 +59,7 @@ function verifyMinValue(levelAccurates) {
       Number(accurate.value) > 100
     ) {
       setLabelWarning(accurate);
+      showInputWarnings(accurate.name);
 
       throw new Error();
     }
@@ -63,6 +71,7 @@ function verifyMinValue(levelAccurates) {
   if (count === 0) {
     levelAccurates.forEach((accurate) => {
       setLabelWarning(accurate);
+      showInputWarnings(accurate.name);
     });
     throw new Error();
   }
@@ -74,6 +83,9 @@ function verifyImagesUrl(levelImages) {
   levelImages.forEach((url) => {
     if (url.value.search(regex) < 0 || !url.value) {
       setLabelWarning(url);
+      showInputWarnings(url.name);
+
+      throw new Error();
     }
   });
 }
@@ -82,10 +94,18 @@ function verifyDescriptions(levelDescriptions) {
   levelDescriptions.forEach((description) => {
     if (description.value.length < 30) {
       setLabelWarning(description);
+      showInputWarnings(description.name);
 
       throw new Error();
     }
   });
+}
+
+function showInputWarnings(elClasseName) {
+  const selectEls = document.querySelectorAll(`.${elClasseName}`);
+  selectEls.forEach(el => {
+    el.style.display = 'block';
+  })
 }
 
 function saveLevelData() {
@@ -133,9 +153,13 @@ function levelTemplate(levelIndex) {
              <span class="default-title">Nível ${levelIndex}</span>
              <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center align-items-center">
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-title" type="text" placeholder="Título do nível">
+             <small class="level-title">O título do nível deve ter pelo menos 10 caracteres</small>
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-accurate" type="text" placeholder="% de acerto mínima">
+             <small class="level-accurate">A porcentagem de acerto deve ser um número entre 0 e 100, sendo obrigatória que haja pelo menos um nível com 0</small>
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-image" type="text" placeholder="URL da imagem do nível">
+             <small class="level-image">Esta URL não é válida</small>
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-description" type="text" placeholder="Descrição do nível">
+             <small class="level-description">A descrição do nível deve possuir no mínimo 30 caracteres</small>
              </div>
           </div>`;
 }
