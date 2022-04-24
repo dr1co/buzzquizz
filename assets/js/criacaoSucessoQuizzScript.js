@@ -1,12 +1,12 @@
-const quizzBasicInfos = JSON.parse(localStorage.getItem("quizzObjectRequest"));
+const quizzConfigObject = JSON.parse(localStorage.getItem("quizzConfigObject",));
 
 function setBasicInfos() {
   document.querySelector(
     ".quizz-image"
-  ).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${quizzBasicInfos.image}")`;
+  ).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${quizzConfigObject.image}")`;
   document.querySelector(
     ".quizz-image p"
-  ).innerHTML = `${quizzBasicInfos.title}`;
+  ).innerHTML = `${quizzConfigObject.title}`;
 }
 
 function viewQuizz() {
@@ -20,3 +20,4 @@ function toHome() {
 }
 
 setBasicInfos();
+
