@@ -32,9 +32,9 @@ function resetAllVerifications(allInputs) {
 
     const warnings = document.querySelectorAll(`.${input.name}`);
 
-    warnings.forEach(warning => {
-      warning.style.display = 'none';
-    })
+    warnings.forEach((warning) => {
+      warning.style.display = "none";
+    });
   });
 }
 
@@ -119,16 +119,16 @@ function verifyDescriptions(levelDescriptions) {
 
 function showInputWarnings(elClasseName) {
   const selectEls = document.querySelectorAll(`.${elClasseName}`);
-  selectEls.forEach(el => {
-    el.style.display = 'block';
-  })
+  selectEls.forEach((el) => {
+    el.style.display = "block";
+  });
 }
 
 async function saveLevelData() {
   const inputs = document.querySelectorAll("[data-level].inputs");
 
   const quizzObjectCreationRequest = JSON.parse(
-      localStorage.getItem("quizzObjectCreationRequest")
+    localStorage.getItem("quizzObjectCreationRequest")
   );
 
   const levels = [];
@@ -147,8 +147,8 @@ async function saveLevelData() {
   quizzObjectCreationRequest.levels = levels;
 
   localStorage.setItem(
-      "quizzObjectCreationRequest",
-      JSON.stringify(quizzObjectCreationRequest)
+    "quizzObjectCreationRequest",
+    JSON.stringify(quizzObjectCreationRequest)
   );
 
   await createQuizzRequest();

@@ -243,7 +243,7 @@ function verifyInputs() {
     verifyAnswersLabels(answersLabels, answerLabelWarning);
     verifyQuestionImagesUrl(imagesUrl, imagesUrlWarning);
     saveObjectData();
-    goToLevelsCreation()
+    goToLevelsCreation();
   } catch (e) {
     showWarningMessage(generalWarning);
   }
