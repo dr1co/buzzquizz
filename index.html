@@ -17,8 +17,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- CONTEXT CSS -->
-    <link rel="stylesheet" href="./assets/css/questionsCreateStyle.css" />
     <link rel="stylesheet" href="assets/css/criacaoInfosBasicasStyle.css" />
+    <link rel="stylesheet" href="./assets/css/questionsCreateStyle.css" />
+    <link rel="stylesheet" href="./assets/css/levelCreateStyle.css" />
   </head>
   <body>
     <header>
@@ -96,12 +97,20 @@
           Prosseguir pra criar níveis
         </button>
       </section>
+
+      <section id="levels-creation">
+        <h3 class="flex justify-content-center">Agora, decida os níveis</h3>
+        <div id="levels"></div>
+        <button onclick="getInputsAndVerify()">Finalizar Quizz</button>
+      </section>
     </main>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- JS -->
     <script src="./assets/js/script.js"></script>
     <!-- CONTEXT JS -->
-    <script src="./assets/js/questionsCreateScript.js"></script>
     <script src="assets/js/criacaoInfosBasicasScript.js"></script>
+    <script src="./assets/js/questionsCreateScript.js"></script>
+    <script src="assets/js/levelCreateScript.js"></script>
   </body>
 </html>

@@ -28,7 +28,7 @@ function saveObjectData() {
     const obj = {};
     obj[info.childNodes[3].dataset.question] = {
       title: info.childNodes[3].value,
-      image: info.childNodes[5].value,
+      color: info.childNodes[5].value,
       answers: [],
     };
 
@@ -241,11 +241,22 @@ function verifyInputs() {
       questionBackgroundColorWarning
     );
     verifyAnswersLabels(answersLabels, answerLabelWarning);
-    verifyImagesUrl(imagesUrl, imagesUrlWarning);
+    verifyQuestionImagesUrl(imagesUrl, imagesUrlWarning);
     saveObjectData();
+    goToLevelsCreation();
   } catch (e) {
     showWarningMessage(generalWarning);
   }
+}
+
+function goToLevelsCreation() {
+  createLevelsInputs();
+
+  const questionsCreation = document.getElementById("questions-creation");
+  const levelsCreation = document.getElementById("levels-creation");
+
+  questionsCreation.style.display = "none";
+  levelsCreation.style.display = "flex";
 }
 
 function resetVerify(allInputs, warnings) {
@@ -326,21 +337,21 @@ function verifyQuestionsBackgroundColor(
   }
 }
 
-function verifyImagesUrl(imagesUrl, imagesUrlWarning) {
+function verifyQuestionImagesUrl(imagesUrl, imagesUrlWarning) {
   let error = 0;
   const regex =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
   imagesUrl.forEach((label) => {
     if (error < 2) {
-      if (label.value.search(regex) < 0 && label.value) {
+      if (label.value.search(regex) < 0 || !label.value) {
         setLabelWarning(label);
         error++;
       }
     }
   });
 
-  if (error > 0) {
+  if (error > 2) {
     showWarningMessage(imagesUrlWarning);
     throw new Error();
   }
