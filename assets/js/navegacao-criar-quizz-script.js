@@ -66,6 +66,6 @@ function viewQuizz(id) {
 
 function createQuizz() {
     document.getElementById("navegacao").style.display = "none";
-    // document.getElementById("criar-quizz").style.display = "inline";
+    // document.getElementById("criacao-infos-basicas").style.display = "inline";
 }
 getQuizzes();
