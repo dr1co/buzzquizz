@@ -21,7 +21,7 @@ async function getInputsAndVerify() {
 
     await saveLevelData();
   } catch (e) {
-    console.log(e);
+    console.log(e.message);
   }
 }
 
@@ -134,7 +134,6 @@ async function saveLevelData() {
   const levels = [];
 
   inputs.forEach((input) => {
-    console.log(input.childNodes);
     const obj = {
       title: input.childNodes[1].value,
       minValue: input.childNodes[5].value,
