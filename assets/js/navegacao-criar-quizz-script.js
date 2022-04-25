@@ -1,29 +1,29 @@
-function getQuizzes() {
+function getAllQuizzes() {
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes');
-    promise.then(loadQuizzes);
+    promise.then(loadAllQuizzes);
     promise.catch(function () {
         console.warn("Houve um problema ao carregar os quizzes");
     });
 }
 
-function loadQuizzes(element){
+function getUserQuizzes() {
     const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
-    const userQuizzes = document.querySelector(".user-quizzes-list");
+    let promise;
+    for(let i = 0 ; i < quizzIds.length ; i++)
+    {
+        promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzIds[i]}`);
+        promise.then(loadUserQuizzes);
+    }
+    promise.then(printNewQuizzButton);
+}
+
+function loadAllQuizzes(element) {
+    const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
     const allQuizzes = document.querySelector(".quizzes-list");
-    userQuizzes.innerHTML = "";
     allQuizzes.innerHTML = "";
     for(let i = 0 ; i < element.data.length ; i++)
     {
-        if(quizzIds.indexOf(element.data[i].id) !== -1)
-        {
-            userQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data[i].id})">
-            <div class="image-background">
-                <p> ${element.data[i].title} </p>
-            </div>
-            <img src=${element.data[i].image} alt="imagem do quizz" />
-        </li>`;
-        }
-        else
+        if(quizzIds.indexOf(element.data[i].id) === -1)
         {
             allQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data[i].id})">
             <div class="image-background">
@@ -33,7 +33,17 @@ function loadQuizzes(element){
         </li>`;
         }
     }
-    printNewQuizzButton();
+    getUserQuizzes();
+}
+
+function loadUserQuizzes(element) {
+    const userQuizzes = document.querySelector(".user-quizzes-list");
+    userQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data.id})">
+    <div class="image-background">
+        <p> ${element.data.title} </p>
+    </div>
+    <img src=${element.data.image} alt="imagem do quizz" />
+</li>`;
 }
 
 function printNewQuizzButton() {
@@ -82,7 +92,7 @@ function showHomePage() {
   </div>
   <ul class="quizzes-list"></ul>`
     homePage.style.display = "block";
-    getQuizzes();
+    getAllQuizzes();
 }
 
 showHomePage();

@@ -82,6 +82,7 @@
     position: relative;
     margin-right: 15px;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 #navegacao .quizz:nth-of-type(3n) {
