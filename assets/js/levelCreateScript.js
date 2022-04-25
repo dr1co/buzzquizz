@@ -20,9 +20,19 @@ async function getInputsAndVerify() {
     verifyDescriptions(levelDescriptions);
 
     await saveLevelData();
+
+    goToSuccesfullyCreatedQuizz();
   } catch (e) {
     console.log(e.message);
   }
+}
+
+function goToSuccesfullyCreatedQuizz() {
+  const levelsCreation = document.getElementById("levels-creation");
+  const sucessoDoQuizz = document.getElementById("sucesso-do-quizz");
+
+  levelsCreation.style.display = "none";
+  sucessoDoQuizz.style.display = "flex";
 }
 
 function resetAllVerifications(allInputs) {
