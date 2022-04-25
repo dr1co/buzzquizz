@@ -9,12 +9,12 @@ function getQuizzes() {
 function loadQuizzes(element){
     const userQuizzes = document.querySelector(".user-quizzes-list");
     const allQuizzes = document.querySelector(".quizzes-list");
-    /* const quizzId = JSON.parse(localStorage.getItem("quizzId")); */
+    const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
     for(let i = 0 ; i < element.data.length ; i++)
     {
-        /* for(let j = 0 ; j < quizzId.length ; j++)
+        for(let j = 0 ; j < quizzIds.length ; j++)
         {
-            if(element.data[i].id === quizzId[j])
+            if(element.data[i].id === quizzIds[j])
             {
                 userQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data[i].id})">
                 <div class="image-background">
@@ -24,15 +24,15 @@ function loadQuizzes(element){
             </li>`;
             }
             else
-            { */
+            {
                 allQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data[i].id})">
                 <div class="image-background">
                     <p> ${element.data[i].title} </p>
                 </div>
                 <img src=${element.data[i].image} alt="imagem do quizz" />
-            </li>`; /*
+            </li>`;
             }
-        } */
+        }
     }
     printNewQuizzButton();
 }
@@ -59,13 +59,25 @@ function printNewQuizzButton() {
 function viewQuizz(id) {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
     promise.then(function () {
-        // document.getElementById("exibicao-quizz").style.display = "inline";
+        document.getElementById("exibicao-quizz").style.display = "inline";
         document.getElementById("navegacao").style.display = "none";
     });
 }
 
 function createQuizz() {
     document.getElementById("navegacao").style.display = "none";
-    // document.getElementById("criacao-infos-basicas").style.display = "inline";
+    document.getElementById("criacao-infos-basicas").style.display = "inline";
 }
-getQuizzes();
+
+function showHomePage() {
+    const sections = document.querySelectorAll("section");
+    const homePage = document.getElementById("navegacao");
+    for(let i = 0 ; i < sections.length ; i++)
+    {
+        sections[i].style.display = "none";
+    }
+    homePage.style.display = "block";
+    getQuizzes();
+}
+
+showHomePage();
