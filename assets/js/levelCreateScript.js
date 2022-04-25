@@ -33,6 +33,7 @@ function goToSuccesfullyCreatedQuizz() {
 
   levelsCreation.style.display = "none";
   sucessoDoQuizz.style.display = "flex";
+  setBasicInfos();
 }
 
 function resetAllVerifications(allInputs) {
