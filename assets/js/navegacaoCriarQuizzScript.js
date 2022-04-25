@@ -43,6 +43,14 @@ function loadUserQuizzes(element) {
         <p> ${element.data.title} </p>
     </div>
     <img src=${element.data.image} alt="imagem do quizz" />
+    <div class="quizz-action-buttons">
+        <button>
+           <ion-icon name="create"></ion-icon>
+        </button>
+        <button>
+            <ion-icon name="trash"></ion-icon>
+        </button>
+    </div>
 </li>`;
 }
 
