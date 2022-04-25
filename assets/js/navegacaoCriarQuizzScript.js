@@ -44,10 +44,10 @@ function loadUserQuizzes(element) {
     </div>
     <img src=${element.data.image} alt="imagem do quizz" />
     <div class="quizz-action-buttons">
-        <button>
+        <button onclick="updateQuizz(${element.data.id})">
            <ion-icon name="create"></ion-icon>
         </button>
-        <button>
+        <button onclick="deleteQuizz(${element.data.id})">
             <ion-icon name="trash"></ion-icon>
         </button>
     </div>

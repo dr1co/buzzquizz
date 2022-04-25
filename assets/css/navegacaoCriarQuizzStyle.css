@@ -136,6 +136,7 @@
     height: 21.92px;
     fill: #FFF;
     cursor: pointer;
+    pointer-events: bounding-box;
 }
 
 @media (max-width: 1100px) {
