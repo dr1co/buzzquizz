@@ -2,8 +2,8 @@ const quizzConfigObject = JSON.parse(localStorage.getItem("quizzConfigObject",))
 
 function setBasicInfos() {
   document.querySelector(
-    ".quizz-image"
-  ).style.backgroundImage = `linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url("${quizzConfigObject.image}")`;
+    ".quizz-image > img"
+  ).src = `${quizzConfigObject.image}`;
   document.querySelector(
     ".quizz-image p"
   ).innerHTML = `${quizzConfigObject.title}`;
@@ -11,13 +11,5 @@ function setBasicInfos() {
 
 function viewQuizz() {
   document.getElementById("sucesso-do-quizz").style.display = "none";
-  //document.getElementById("visualizar-quizz").style.display = "block"; -- Seria para mostrar a página de visualização do quizz, ainda não sei como passar os parâmetros uma vez que essa página não está definida ainda...
+  document.getElementById("exibicao-quizz").style.display = "block";
 }
-
-function toHome() {
-  document.getElementById("sucesso-do-quizz").style.display = "none";
-  //document.getElementBById("página-home").style.display = "block"; -- Para mostrar a página home
-}
-
-setBasicInfos();
-
