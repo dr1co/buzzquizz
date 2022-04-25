@@ -1,91 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    text-decoration: none;
-    list-style: unset;
-    border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  list-style: unset;
+  border: none;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background: #FAFAFA;
+  font-family: "Roboto", sans-serif;
+  background: #fafafa;
 }
 
 header {
-    width: 100vw;
-    height: 69px;
-    background: #EC362D;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100vw;
+  height: 69px;
+  background: #ec362d;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 header .header-title {
-    font-weight: 700;
-    font-size: 37px;
-    line-height: 43px;
-    color: #fff;
+  font-weight: 700;
+  font-size: 37px;
+  line-height: 43px;
+  color: #fff;
 }
 
 h3 {
-    font-weight: 700;
-    font-size: 23px;
-    line-height: 27px;
-    color: #000000;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 27px;
+  color: #000000;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex-direction-column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .justify-content-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .align-items-center {
-    align-items: center;
+  align-items: center;
 }
 
 .default-input-group-width {
-    width: 564px;
+  width: 564px;
 }
 
 .default-input-style {
-    max-width: 564px;
-    height: 46px;
-    border: 1px solid #D1D1D1;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 14px;
-    padding-left: 23px;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 22px;
+  max-width: 564px;
+  height: 46px;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-left: 23px;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 22px;
 }
 
 .default-input-style::placeholder {
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 22px;
-    font-style: italic;
-    color: #BABABA;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 22px;
+  font-style: italic;
+  color: #bababa;
 }
 
 .default-title {
-    font-weight: 700;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+  margin-bottom: 14px;
+  padding-top: 28px;
+}
+
+@media screen and (max-width: 1100px) {
+  .default-input-group-width {
+    width: 100%;
+  }
+
+  h3 {
     font-size: 20px;
     line-height: 23px;
-    color: #000000;
-    margin-bottom: 14px;
-    padding-top: 28px;
+  }
 }
