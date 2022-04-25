@@ -1,6 +1,5 @@
-const quizzConfigObject = JSON.parse(localStorage.getItem("quizzConfigObject",));
-
 function setBasicInfos() {
+  const quizzConfigObject = JSON.parse(localStorage.getItem("quizzConfigObject",));
   document.querySelector(
     ".quizz-image > img"
   ).src = `${quizzConfigObject.image}`;

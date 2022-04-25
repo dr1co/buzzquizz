@@ -8,7 +8,6 @@ function getQuizzes() {
 
 function loadQuizzes(element){
     const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
-    printNewQuizzButton(quizzIds);
     const userQuizzes = document.querySelector(".user-quizzes-list");
     const allQuizzes = document.querySelector(".quizzes-list");
     userQuizzes.innerHTML = "";
@@ -34,11 +33,13 @@ function loadQuizzes(element){
         </li>`;
         }
     }
+    printNewQuizzButton();
 }
 
-function printNewQuizzButton(quizzIds) {
+function printNewQuizzButton() {
     const userQuizzes = document.querySelector(".user-quizzes");
-    if(quizzIds.length === 0)
+    userQuizzesList = userQuizzes.querySelectorAll("li");
+    if(userQuizzesList.length === 0)
     {
         userQuizzes.innerHTML = `<div class="create-quizz flex flex-direction-column justify-content-center align-items-center">
         <p> Você não criou nenhum <br> quizz ainda :( </p>
@@ -51,7 +52,7 @@ function printNewQuizzButton(quizzIds) {
         <h3> Seus Quizzes </h3>
         <ion-icon name="add-circle" onclick="createQuizz()"></ion-icon>
     </div>
-    <ul class="user-quizzes-list"></ul>`;
+    ` + userQuizzes.innerHTML;
     }
 }
 
@@ -75,6 +76,11 @@ function showHomePage() {
     {
         sections[i].style.display = "none";
     }
+    document.querySelector(".user-quizzes").innerHTML = `<ul class="user-quizzes-list"></ul>`;
+    document.querySelector(".all-quizzes").innerHTML = `<div class="quizzes-title">
+    <h3>Todos os Quizzes</h3>
+  </div>
+  <ul class="quizzes-list"></ul>`
     homePage.style.display = "block";
     getQuizzes();
 }
