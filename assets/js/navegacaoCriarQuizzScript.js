@@ -9,7 +9,7 @@ function getAllQuizzes() {
 function getUserQuizzes() {
     const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
     let promise;
-    if(quizzIds.length !== 0)
+    if(quizzIds)
     {
         for(let i = 0 ; i < quizzIds.length ; i++)
         {
@@ -26,18 +26,31 @@ function getUserQuizzes() {
 
 function loadAllQuizzes(element) {
     const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
+    console.log(quizzIds);
     const allQuizzes = document.querySelector(".quizzes-list");
     allQuizzes.innerHTML = "";
     for(let i = 0 ; i < element.data.length ; i++)
     {
-        if(quizzIds.indexOf(element.data[i].id) === -1)
+        if(quizzIds)
+        {
+            if(quizzIds.indexOf(element.data[i].id) === -1)
+            {
+                allQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data[i].id})">
+                <div class="image-background">
+                    <p> ${element.data[i].title} </p>
+                </div>
+                <img src=${element.data[i].image} alt="imagem do quizz" />
+            </li>`;
+            }
+        }
+        else
         {
             allQuizzes.innerHTML += `<li class="quizz" onclick="viewQuizz(${element.data[i].id})">
-            <div class="image-background">
-                <p> ${element.data[i].title} </p>
-            </div>
-            <img src=${element.data[i].image} alt="imagem do quizz" />
-        </li>`;
+                <div class="image-background">
+                    <p> ${element.data[i].title} </p>
+                </div>
+                <img src=${element.data[i].image} alt="imagem do quizz" />
+            </li>`;
         }
     }
     getUserQuizzes();
