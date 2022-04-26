@@ -5,6 +5,7 @@ function viewQuizz(id) {
     promise.then(loadQuizz);
     const homePage = document.getElementById("navegacao");
     const quizzPage = document.getElementById("exibicao-quizz");
+    const successQuizzPage = document.getElementById("sucesso-do-quizz");
     quizzPage.innerHTML = `<div class="quizz-header flex align-items-center justify-content-center">
     <img alt="Imagem do quizz" />
     <div class="image-background flex justify-content-center align-items-center">
@@ -13,6 +14,7 @@ function viewQuizz(id) {
     </div>`;
     homePage.style.display = "none";
     quizzPage.style.display = "block";
+    successQuizzPage.style.display = "none";
     currentQuizzId = id;
 }
 
