@@ -1,12 +1,19 @@
-let promise;
+let quizzLevels, currentQuizzId;
 
 function viewQuizz(id) {
-    promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
     promise.then(loadQuizz);
     const homePage = document.getElementById("navegacao");
     const quizzPage = document.getElementById("exibicao-quizz");
+    quizzPage.innerHTML = `<div class="quizz-header flex align-items-center justify-content-center">
+    <img alt="Imagem do quizz" />
+    <div class="image-background flex justify-content-center align-items-center">
+    <p></p>
+    </div>
+    </div>`;
     homePage.style.display = "none";
     quizzPage.style.display = "block";
+    currentQuizzId = id;
 }
 
 function loadQuizz(element) {
@@ -47,6 +54,7 @@ function loadQuizz(element) {
             }
         }
     }
+    quizzLevels = element.data.levels;
 }
 
 function selectAnswer(element) {
@@ -74,7 +82,7 @@ function checkResults() {
     const selectedAnswers = document.getElementById("exibicao-quizz").querySelectorAll(".selected.answer");
     if(questions.length === selectedAnswers.length)
     {
-        getResults();
+        showResults();
     }
     else
     {
@@ -82,49 +90,45 @@ function checkResults() {
     }
 }
 
-function getResults() {
-    promise.then(showResults);
-    console.log("passei por aqui")
-}
-
-function showResults(element) {
+function showResults() {
     const levelBox = document.getElementById("exibicao-quizz");
     const questions = levelBox.querySelectorAll(".content-box");
     const correctAnswers = document.getElementById("exibicao-quizz").querySelectorAll(".selected.correct");
     const result = Math.round(100*correctAnswers.length / questions.length);
-    let j = 0;
-    for(let i = 0 ; i < element.data.levels.length ; i++)
+    let printed = false;
+    for(let i = 0 ; i < quizzLevels.length - 1 ; i++)
     {
-        j = i + 1;
-        if(j < element.data.levels.length)
+        if(result >= quizzLevels[i].minValue && result <= quizzLevels[i+1].minValue)
         {
-            if(result >= element.data.levels[i].minValue && result <= element.data.levels[j].minValue && j <= element.data.levels.length)
-            {
-                levelBox.innerHTML += `<div class="content-box">
-                    <div class="level-title">
-                    <p> ${element.data.levels[i].title} </p>
-                    </div>
-                    <div class="level-description flex">
-                    <img src="${element.data.levels[i].image}" alt="imagem do nível" />
-                    <p> ${element.data.levels[i].text} </p>
-                    </div>
-                    </div>`;
-            }
-        }
-        else
-        {
+            printed = true;
             levelBox.innerHTML += `<div class="content-box">
                 <div class="level-title">
-                <p> ${element.data.levels[i].title} </p>
+                <p> ${result}% de acerto: ${quizzLevels[i].title} </p>
                 </div>
-                <div class="level-description flex">
-                <img src="${element.data.levels[i].image}" alt="imagem do nível" />
-                <p> ${element.data.levels[i].text} </p>
+                <div class="level flex">
+                <img src="${quizzLevels[i].image}" alt="imagem do nível" />
+                <p> ${quizzLevels[i].text} </p>
                 </div>
                 </div>`;
         }
     }
-    console.log("e por aqui");
+    if(!printed)
+    {
+        levelBox.innerHTML += `<div class="content-box">
+                <div class="level-title">
+                <p> ${result}% de acerto: ${quizzLevels[quizzLevels.length - 1].title} </p>
+                </div>
+                <div class="level flex">
+                <img src="${quizzLevels[quizzLevels.length - 1].image}" alt="imagem do nível" />
+                <p> ${quizzLevels[quizzLevels.length - 1].text} </p>
+                </div>
+                </div>`;
+    }
+    levelBox.querySelector(".content-box:last-of-type").scrollIntoView();
+    levelBox.innerHTML += `<div class="buttons-list flex flex-direction-column justify-content-center align-items-center">
+        <button class="restart-button" onclick="viewQuizz(currentQuizzId)"> Reiniciar Quizz </button>
+        <button class="home-button" onclick="showHomePage()"> Ir para home </button>
+        </div>`;
 }
 
 function comparator() {

@@ -1,6 +1,6 @@
 #navegacao {
     width: 1050px;
-    margin: 70px auto;
+    margin: 22px auto;
 }
 
 #navegacao h3 {
@@ -16,7 +16,10 @@
 }
 
 #navegacao .quizzes-title {
-    margin-bottom: 12px;
+    width: 100%;
+    height: fit-content;
+    margin: 48px auto 12px auto;
+    position: relative;
 }
 
 #navegacao .quizzes-title ion-icon {
@@ -101,7 +104,14 @@
 @media (max-width: 1100px) {
     #navegacao {
         width: 340px;
-        margin: 70px auto;
+    }
+    
+    #navegacao .quizzes-title {
+        width: 340px;
+    }
+    #navegacao .quizzes-title ion-icon {
+        position: absolute;
+        right: 0;
     }
 
     #navegacao .user-quizzes-title {
