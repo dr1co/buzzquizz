@@ -191,8 +191,22 @@ function createLevelsInputs() {
   }
 }
 
+function openLevelsInputs(el) {
+  el.classList.add("d-none");
+  const levels = document.querySelectorAll("[data-level]");
+  levels.forEach((question) => {
+    if (question.dataset.level === el.id) {
+      question.classList.remove("d-none");
+    }
+  });
+}
+
 function levelTemplate(levelIndex) {
-  return `<div id="level-${levelIndex}" class="level">
+  return `<div onclick="openLevelsInputs(this)" class="level-label" id="nivel${levelIndex}">
+            <span class="default-title">Nível ${levelIndex}</span>
+            <img src="./assets/img/question-icon.png" alt="Expandir nível">
+          </div> 
+          <div data-level="nivel${levelIndex}" id="level-${levelIndex}" class="level d-none">
              <span class="default-title">Nível ${levelIndex}</span>
              <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center">
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-title" type="text" placeholder="Título do nível">

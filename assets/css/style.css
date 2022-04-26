@@ -100,3 +100,7 @@ h3 {
     line-height: 23px;
   }
 }
+
+.d-none {
+  display: none!important;
+}
