@@ -11,7 +11,6 @@ function createQuestionsInputs() {
 
   if (apiQuizz) {
     goToQuestionsCreationAndCompleteValues(apiQuizz);
-    // localStorage.removeItem('apiQuizz');
   }
 }
 
