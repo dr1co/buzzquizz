@@ -107,4 +107,8 @@
     #navegacao .user-quizzes-title {
         justify-content: space-between;
     }
+    
+    #navegacao .quizz {
+        margin-right: 0px;
+    }
 }

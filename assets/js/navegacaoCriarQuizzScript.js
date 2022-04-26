@@ -66,14 +66,6 @@ function printNewQuizzButton() {
     }
 }
 
-function viewQuizz(id) {
-    const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`);
-    promise.then(function () {
-        document.getElementById("exibicao-quizz").style.display = "inline";
-        document.getElementById("navegacao").style.display = "none";
-    });
-}
-
 function createQuizz() {
     document.getElementById("navegacao").style.display = "none";
     document.getElementById("criacao-infos-basicas").style.display = "inline";
