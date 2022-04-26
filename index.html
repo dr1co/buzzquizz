@@ -31,7 +31,6 @@
     </header>
 
     <main>
-
       <section id="navegacao" class="flex flex-direction-column">
         <div class="user-quizzes flex flex-direction-column">
           <ul class="user-quizzes-list"></ul>
@@ -141,6 +140,12 @@
         </div>
       </section>
     </main>
+    <div id="delete-modal">
+      <div class="delete-title">Tem certeza que deseja excluir esse quiz?</div>
+      <div class="delete-warning">Essa ação é irreversível.</div>
+      <button onclick="deleteAction()">Excluir</button>
+      <button onclick="cancelAction()">Cancelar</button>
+    </div>
     <!-- CDN PACKAGES DEPENDENCIES -->
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

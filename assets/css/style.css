@@ -105,3 +105,48 @@ h3 {
 .d-none {
   display: none!important;
 }
+
+#delete-modal {
+  display: none;
+  width: 600px;
+  padding: 20px;
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 300px);
+  z-index: 100;
+  background: #FFF;
+  border: 1px solid #EC362D;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#delete-modal .delete-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+#delete-modal .delete-warning {
+  color: #EC362D;
+}
+
+#delete-modal button {
+  width: 100px;
+  height: 30px;
+  margin: 25px;
+  color: #fff5f4;
+  background-color: #ec362d;
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 15px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#delete-modal button:hover {
+  opacity: 1;
+}
+
+#delete-modal button:last-child {
+  background-color: #818181;
+}

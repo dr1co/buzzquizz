@@ -53,17 +53,16 @@ async function updateQuizzRequest(quizzInfo, quizzObjectCreationRequest) {
   return response;
 }
 
-async function deleteQuizz(id) {
-  const quizz = findQuizz(id);
-
+async function deleteQuizz(deleteQuizz) {
   await axios.delete(
-    `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`,
+    `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${deleteQuizz.id}`,
     {
       headers: {
-        "Secret-Key": quizz.key,
+        "Secret-Key": deleteQuizz.key,
       },
     }
   );
+  location.reload();
 }
 
 async function updateQuizz(id) {
