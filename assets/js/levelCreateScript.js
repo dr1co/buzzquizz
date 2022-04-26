@@ -1,4 +1,4 @@
-async function getInputsAndVerify() {
+async function getInputsAndVerify(quizz = null) {
   const levelTitles = document.getElementsByName("level-title");
   const levelAccurates = document.getElementsByName("level-accurate");
   const levelImages = document.getElementsByName("level-image");
@@ -19,7 +19,7 @@ async function getInputsAndVerify() {
     verifyLevelImagesUrl(levelImages);
     verifyDescriptions(levelDescriptions);
 
-    await saveLevelData();
+    await saveLevelData(quizz);
 
     goToSuccesfullyCreatedQuizz();
   } catch (e) {
@@ -135,7 +135,7 @@ function showInputWarnings(elClasseName) {
   });
 }
 
-async function saveLevelData() {
+async function saveLevelData(quizz = null) {
   const inputs = document.querySelectorAll("[data-level].inputs");
 
   const quizzObjectCreationRequest = JSON.parse(
@@ -162,7 +162,14 @@ async function saveLevelData() {
     JSON.stringify(quizzObjectCreationRequest)
   );
 
-  await createQuizzRequest();
+  if (!quizz) {
+    await createQuizzRequest();
+  } else {
+    const quizzObjectCreationRequest = JSON.parse(
+        localStorage.getItem("quizzObjectCreationRequest")
+    );
+    await updateQuizzRequest(quizz, quizzObjectCreationRequest);
+  }
 }
 
 function createLevelsInputs() {
@@ -180,7 +187,7 @@ function createLevelsInputs() {
 
   if (apiQuizz) {
     goToLevelsCreationAndCompleteValues(apiQuizz);
-    // localStorage.removeItem('apiQuizz');
+    localStorage.removeItem('apiQuizz');
   }
 }
 

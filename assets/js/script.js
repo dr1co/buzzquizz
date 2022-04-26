@@ -38,6 +38,34 @@ async function createQuizzRequest() {
   return data;
 }
 
+async function updateQuizzRequest(quizzInfo, quizzObjectCreationRequest) {
+  const response = await axios({
+    method: 'put',
+    url: `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzInfo.id}`,
+    data: quizzObjectCreationRequest,
+    headers: {
+      "Secret-Key": quizzInfo.key,
+    }
+  })
+  const finishButton = document.getElementById('finish-quizz');
+  finishButton.style.display = 'block';
+
+  return response;
+}
+
+async function deleteQuizz(id) {
+  const quizz = findQuizz(id);
+
+  await axios.delete(
+    `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`,
+    {
+      headers: {
+        "Secret-Key": quizz.key,
+      },
+    }
+  );
+}
+
 async function updateQuizz(id) {
   event.stopPropagation();
   const apiQuizz = await getQuizz(id);
@@ -45,9 +73,20 @@ async function updateQuizz(id) {
 
   goToBasicInfoCreationAndCompleteValues(apiQuizz);
 
-  console.log(apiQuizz);
+  const finishButton = document.getElementById("finish-quizz");
+  const levelsCreation = document.getElementById("levels-creation");
 
-  // const quizz = findQuizz(id);
+  finishButton.style.display = "none";
+  levelsCreation.innerHTML += updateButton(id);
+}
+
+async function updateData(id) {
+  const quizz = findQuizz(id);
+  await getInputsAndVerify(quizz);
+}
+
+function updateButton(id) {
+  return `<button id="update-quizz" onclick="updateData(${id})">Atualizar Quizz</button>`;
 }
 
 function goToBasicInfoCreationAndCompleteValues(quizz) {
@@ -97,12 +136,12 @@ function goToQuestionsCreationAndCompleteValues(quizz) {
 function goToLevelsCreationAndCompleteValues(quizz) {
   quizz.levels.forEach((level, index) => {
     const nivel = document.getElementById(`level-${index + 1}`);
-    console.log(nivel.childNodes[3].childNodes);
+
     nivel.childNodes[3].childNodes[1].value = level.title;
-    nivel.childNodes[3].childNodes[5].value = level.image;
-    nivel.childNodes[3].childNodes[9].value = level.minValue;
+    nivel.childNodes[3].childNodes[5].value = level.minValue;
+    nivel.childNodes[3].childNodes[9].value = level.image;
     nivel.childNodes[3].childNodes[13].value = level.text;
-  })
+  });
 }
 
 async function getQuizz(id) {
@@ -111,19 +150,6 @@ async function getQuizz(id) {
   );
 
   return data;
-}
-
-async function deleteQuizz(id) {
-  const quizz = findQuizz(id);
-
-  await axios.delete(
-    `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`,
-    {
-      headers: {
-        "Secret-Key": quizz.key,
-      },
-    }
-  );
 }
 
 function findQuizz(id) {
