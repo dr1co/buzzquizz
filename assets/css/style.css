@@ -30,6 +30,7 @@ header .header-title {
   font-size: 37px;
   line-height: 43px;
   color: #fff;
+  cursor: pointer;
 }
 
 h3 {
