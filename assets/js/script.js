@@ -94,6 +94,17 @@ function goToQuestionsCreationAndCompleteValues(quizz) {
   });
 }
 
+function goToLevelsCreationAndCompleteValues(quizz) {
+  quizz.levels.forEach((level, index) => {
+    const nivel = document.getElementById(`level-${index + 1}`);
+    console.log(nivel.childNodes[3].childNodes);
+    nivel.childNodes[3].childNodes[1].value = level.title;
+    nivel.childNodes[3].childNodes[5].value = level.image;
+    nivel.childNodes[3].childNodes[9].value = level.minValue;
+    nivel.childNodes[3].childNodes[13].value = level.text;
+  })
+}
+
 async function getQuizz(id) {
   const { data } = await axios.get(
     `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`

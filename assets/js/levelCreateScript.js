@@ -175,10 +175,17 @@ function createLevelsInputs() {
   for (let i = 1; i <= numberLevels; i++) {
     levels.innerHTML += levelTemplate(i);
   }
+
+  const apiQuizz = JSON.parse(localStorage.getItem('apiQuizz'));
+
+  if (apiQuizz) {
+    goToLevelsCreationAndCompleteValues(apiQuizz);
+    // localStorage.removeItem('apiQuizz');
+  }
 }
 
 function levelTemplate(levelIndex) {
-  return `<div class="level">
+  return `<div id="level-${levelIndex}" class="level">
              <span class="default-title">Nível ${levelIndex}</span>
              <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center">
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-title" type="text" placeholder="Título do nível">
