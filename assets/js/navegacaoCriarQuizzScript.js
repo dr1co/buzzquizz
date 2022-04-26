@@ -87,6 +87,10 @@ function createQuizz() {
     document.getElementById("criacao-infos-basicas").style.display = "inline";
 }
 
+function returnHomePage() {
+    location.reload();
+}
+
 function showHomePage() {
     const sections = document.querySelectorAll("section");
     const homePage = document.getElementById("navegacao");
