@@ -1,4 +1,4 @@
-async function getInputsAndVerify() {
+async function getInputsAndVerify(quizz = null) {
   const levelTitles = document.getElementsByName("level-title");
   const levelAccurates = document.getElementsByName("level-accurate");
   const levelImages = document.getElementsByName("level-image");
@@ -19,7 +19,7 @@ async function getInputsAndVerify() {
     verifyLevelImagesUrl(levelImages);
     verifyDescriptions(levelDescriptions);
 
-    await saveLevelData();
+    await saveLevelData(quizz);
 
     goToSuccesfullyCreatedQuizz();
   } catch (e) {
@@ -135,7 +135,7 @@ function showInputWarnings(elClasseName) {
   });
 }
 
-async function saveLevelData() {
+async function saveLevelData(quizz = null) {
   const inputs = document.querySelectorAll("[data-level].inputs");
 
   const quizzObjectCreationRequest = JSON.parse(
@@ -162,7 +162,14 @@ async function saveLevelData() {
     JSON.stringify(quizzObjectCreationRequest)
   );
 
-  await createQuizzRequest();
+  if (!quizz) {
+    await createQuizzRequest();
+  } else {
+    const quizzObjectCreationRequest = JSON.parse(
+        localStorage.getItem("quizzObjectCreationRequest")
+    );
+    await updateQuizzRequest(quizz, quizzObjectCreationRequest);
+  }
 }
 
 function createLevelsInputs() {
@@ -175,10 +182,31 @@ function createLevelsInputs() {
   for (let i = 1; i <= numberLevels; i++) {
     levels.innerHTML += levelTemplate(i);
   }
+
+  const apiQuizz = JSON.parse(localStorage.getItem('apiQuizz'));
+
+  if (apiQuizz) {
+    goToLevelsCreationAndCompleteValues(apiQuizz);
+    localStorage.removeItem('apiQuizz');
+  }
+}
+
+function openLevelsInputs(el) {
+  el.classList.add("d-none");
+  const levels = document.querySelectorAll("[data-level]");
+  levels.forEach((question) => {
+    if (question.dataset.level === el.id) {
+      question.classList.remove("d-none");
+    }
+  });
 }
 
 function levelTemplate(levelIndex) {
-  return `<div class="level">
+  return `<div onclick="openLevelsInputs(this)" class="level-label" id="nivel${levelIndex}">
+            <span class="default-title">Nível ${levelIndex}</span>
+            <img src="./assets/img/question-icon.png" alt="Expandir nível">
+          </div> 
+          <div data-level="nivel${levelIndex}" id="level-${levelIndex}" class="level d-none">
              <span class="default-title">Nível ${levelIndex}</span>
              <div data-level="nivel${levelIndex}" class="inputs default-input-group-width flex flex-direction-column justify-content-center">
              <input data-level="nivel${levelIndex}" class="default-input-style" name="level-title" type="text" placeholder="Título do nível">

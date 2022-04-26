@@ -64,3 +64,23 @@ small {
   margin-bottom: 14px;
   color: #ec362d;
 }
+
+.level-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 74px;
+  cursor: pointer;
+  width: 100%;
+  background: #FFF;
+}
+
+.level-label .default-title {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.level-label img {
+  width: 26px;
+  height: 23px;
+}
