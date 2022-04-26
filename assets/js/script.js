@@ -41,8 +41,7 @@ async function createQuizzRequest() {
 async function updateQuizz(id) {
   event.stopPropagation();
   const apiQuizz = await getQuizz(id);
-  localStorage.setItem('apiQuizz', JSON.stringify(apiQuizz));
-
+  localStorage.setItem("apiQuizz", JSON.stringify(apiQuizz));
 
   goToBasicInfoCreationAndCompleteValues(apiQuizz);
 
@@ -52,8 +51,8 @@ async function updateQuizz(id) {
 }
 
 function goToBasicInfoCreationAndCompleteValues(quizz) {
-  const criacaoInfosBasicas = document.getElementById('criacao-infos-basicas');
-  const navegacao = document.getElementById('navegacao');
+  const criacaoInfosBasicas = document.getElementById("criacao-infos-basicas");
+  const navegacao = document.getElementById("navegacao");
   const quizzTitle = document.getElementById("quizzTitle");
   const quizzImage = document.getElementById("quizzImage");
   const quizzNumberQuestions = document.getElementById("quizzNumberQuestions");
@@ -64,22 +63,35 @@ function goToBasicInfoCreationAndCompleteValues(quizz) {
   quizzNumberQuestions.value = quizz.questions.length;
   quizzNumberLevels.value = quizz.levels.length;
 
-  navegacao.style.display = 'none';
-  criacaoInfosBasicas.style.display = 'block';
+  navegacao.style.display = "none";
+  criacaoInfosBasicas.style.display = "block";
 }
 
 function goToQuestionsCreationAndCompleteValues(quizz) {
-  const answersLabels = document.getElementsByName("answer-label");
-  const questionsText = document.getElementsByName("question-text");
-  const questionsBackgroundColor = document.getElementsByName(
-      "question-background-color"
-  );
-  const imagesUrl = document.getElementsByName("image-url");
+  quizz.questions.forEach((question, index) => {
+    const pergunta = document.getElementById(`pergunta-${index + 1}`);
 
-  for (let i = 0; i < questionsText.length; i++) {
-    questionsText[i].value = quizz.questions[i].title;
-    questionsBackgroundColor[i].value = quizz.questions[i].color;
-  }
+    pergunta.childNodes[1].childNodes[3].value = question.title;
+    pergunta.childNodes[1].childNodes[5].value = question.color;
+    question.answers.forEach((answer, index) => {
+      if (answer.isCorrectAnswer) {
+        pergunta.childNodes[3].childNodes[3].value = answer.text;
+        pergunta.childNodes[3].childNodes[5].value = answer.image;
+      }
+      if (!answer.isCorrectAnswer && index === 1) {
+        pergunta.childNodes[5].childNodes[3].childNodes[1].value = answer.text;
+        pergunta.childNodes[5].childNodes[3].childNodes[3].value = answer.image;
+      }
+      if (!answer.isCorrectAnswer && index === 2) {
+        pergunta.childNodes[5].childNodes[5].childNodes[1].value = answer.text;
+        pergunta.childNodes[5].childNodes[5].childNodes[3].value = answer.image;
+      }
+      if (!answer.isCorrectAnswer && index === 3) {
+        pergunta.childNodes[5].childNodes[7].childNodes[1].value = answer.text;
+        pergunta.childNodes[5].childNodes[7].childNodes[3].value = answer.image;
+      }
+    });
+  });
 }
 
 async function getQuizz(id) {
@@ -93,11 +105,14 @@ async function getQuizz(id) {
 async function deleteQuizz(id) {
   const quizz = findQuizz(id);
 
-  await axios.delete(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`, {
-    headers: {
-      "Secret-Key": quizz.key
+  await axios.delete(
+    `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`,
+    {
+      headers: {
+        "Secret-Key": quizz.key,
+      },
     }
-  })
+  );
 }
 
 function findQuizz(id) {

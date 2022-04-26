@@ -115,7 +115,7 @@ function questionTemplate(index) {
             <span class="default-title">Pergunta ${index}</span>
             <img src="./assets/img/question-icon.png" alt="Expandir pergunta">
           </div> 
-          <div data-question="pergunta${index}" class="default-input-group-width flex flex-direction-column d-none">  
+          <div  id="pergunta-${index}" data-question="pergunta${index}" class="default-input-group-width flex flex-direction-column d-none">  
             <div data-question="pergunta${index}" class="general-question-info flex flex-direction-column">
               <span class="default-title">Pergunta ${index}</span>
               <input
