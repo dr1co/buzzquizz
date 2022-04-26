@@ -81,6 +81,7 @@ function createQuizz() {
 
 function returnHomePage() {
     location.reload();
+    localStorage.removeItem('apiQuizz');
 }
 
 function showHomePage() {

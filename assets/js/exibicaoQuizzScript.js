@@ -129,7 +129,7 @@ function showResults() {
     levelBox.querySelector(".content-box:last-of-type").scrollIntoView();
     levelBox.innerHTML += `<div class="buttons-list flex flex-direction-column justify-content-center align-items-center">
         <button class="restart-button" onclick="viewQuizz(currentQuizzId)"> Reiniciar Quizz </button>
-        <button class="home-button" onclick="showHomePage()"> Ir para home </button>
+        <button class="home-button" onclick="returnHomePage()"> Ir para home </button>
         </div>`;
 }
 

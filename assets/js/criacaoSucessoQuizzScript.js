@@ -12,7 +12,7 @@ function setBasicInfos() {
   ).innerHTML = `<button class="view-quizz-button" onclick="viewQuizz(${quizzIds[quizzIds.length - 1]})">
     Acessar Quizz
   </button>
-  <button class="home-button" onclick="showHomePage()">
+  <button class="home-button" onclick="returnHomePage()">
     Voltar para home
   </button>`;
 }
