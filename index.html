@@ -20,10 +20,8 @@
     <link rel="stylesheet" href="./assets/css/questionsCreateStyle.css" />
     <link rel="stylesheet" href="./assets/css/levelCreateStyle.css" />
     <link rel="stylesheet" href="assets/css/criacaoSucessoQuizzStyle.css" />
-    <link
-      rel="stylesheet"
-      href="assets/css/navegacaoCriarQuizzStyle.css"
-    />
+    <link rel="stylesheet" href="./assets/css/navegacaoCriarQuizzStyle.css" />
+    <link rel="stylesheet" href="./assets/css/exibicaoQuizzStyle.css" />
   </head>
   <body>
     <header>
@@ -41,6 +39,10 @@
           </div>
           <ul class="quizzes-list"></ul>
         </div>
+      </section>
+
+      <section id="exibicao-quizz">
+        
       </section>
 
       <section id="criacao-infos-basicas">
@@ -130,7 +132,7 @@
             <p>Título do quizz</p>
           </div>
         </div>
-        <div class="flex flex-direction-column justify-content-center">
+        <div class="show-quizz-buttons flex flex-direction-column justify-content-center">
           <button class="view-quizz-button" onclick="viewQuizz()">
             Acessar Quizz
           </button>
@@ -152,10 +154,11 @@
     <!-- JS -->
     <script src="./assets/js/script.js"></script>
     <!-- CONTEXT JS -->
-    <script src="assets/js/criacaoInfosBasicasScript.js"></script>
+    <script src="./assets/js/criacaoInfosBasicasScript.js"></script>
     <script src="./assets/js/questionsCreateScript.js"></script>
-    <script src="assets/js/levelCreateScript.js"></script>
-    <script src="assets/js/criacaoSucessoQuizzScript.js"></script>
-    <script src="assets/js/navegacaoCriarQuizzScript.js"></script>
+    <script src="./assets/js/levelCreateScript.js"></script>
+    <script src="./assets/js/criacaoSucessoQuizzScript.js"></script>
+    <script src="./assets/js/navegacaoCriarQuizzScript.js"></script>
+    <script src="./assets/js/exibicaoQuizzScript.js"></script>
   </body>
 </html>
