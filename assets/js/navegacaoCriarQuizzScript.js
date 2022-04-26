@@ -83,6 +83,7 @@ function viewQuizz(id) {
 }
 
 function createQuizz() {
+    localStorage.removeItem('apiQuizz');
     document.getElementById("navegacao").style.display = "none";
     document.getElementById("criacao-infos-basicas").style.display = "inline";
 }
