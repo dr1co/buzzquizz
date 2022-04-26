@@ -9,12 +9,19 @@ function getAllQuizzes() {
 function getUserQuizzes() {
     const quizzIds = JSON.parse(localStorage.getItem("quizzIds"));
     let promise;
-    for(let i = 0 ; i < quizzIds.length ; i++)
+    if(quizzIds.length !== 0)
     {
-        promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzIds[i]}`);
-        promise.then(loadUserQuizzes);
+        for(let i = 0 ; i < quizzIds.length ; i++)
+        {
+            promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzIds[i]}`);
+            promise.then(loadUserQuizzes);
+        }
+        promise.then(printNewQuizzButton);
     }
-    promise.then(printNewQuizzButton);
+    else
+    {
+        printNewQuizzButton();
+    }
 }
 
 function loadAllQuizzes(element) {
