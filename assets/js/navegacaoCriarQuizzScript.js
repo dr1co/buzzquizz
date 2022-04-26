@@ -43,6 +43,14 @@ function loadUserQuizzes(element) {
         <p> ${element.data.title} </p>
     </div>
     <img src=${element.data.image} alt="imagem do quizz" />
+    <div class="quizz-action-buttons">
+        <button onclick="updateQuizz(${element.data.id})">
+           <ion-icon name="create"></ion-icon>
+        </button>
+        <button onclick="showDeleteModal(${element.data.id})">
+            <ion-icon name="trash"></ion-icon>
+        </button>
+    </div>
 </li>`;
 }
 
@@ -71,6 +79,10 @@ function createQuizz() {
     document.getElementById("criacao-infos-basicas").style.display = "inline";
 }
 
+function returnHomePage() {
+    location.reload();
+}
+
 function showHomePage() {
     const sections = document.querySelectorAll("section");
     const homePage = document.getElementById("navegacao");
@@ -85,6 +97,27 @@ function showHomePage() {
   <ul class="quizzes-list"></ul>`
     homePage.style.display = "block";
     getAllQuizzes();
+}
+
+function showDeleteModal(id) {
+    const quizz = findQuizz(id);
+    localStorage.setItem("deleteQuizz", JSON.stringify(quizz));
+    const deleteModal = document.getElementById("delete-modal");
+    deleteModal.style.display = "block";
+}
+
+async function deleteAction() {
+    const deleteQuizzObj = JSON.parse(localStorage.getItem("deleteQuizz"));
+
+    const deleteModal = document.getElementById("delete-modal");
+    deleteModal.style.display = "none";
+
+    await deleteQuizz(deleteQuizzObj);
+}
+
+function cancelAction() {
+    const deleteModal = document.getElementById("delete-modal");
+    deleteModal.style.display = "none";
 }
 
 showHomePage();
