@@ -41,15 +41,17 @@ async function createQuizzRequest() {
 async function updateQuizz(id) {
   event.stopPropagation();
   const apiQuizz = await getQuizz(id);
+  localStorage.setItem('apiQuizz', JSON.stringify(apiQuizz));
 
-  goToBasicInfoCreation(apiQuizz);
+
+  goToBasicInfoCreationAndCompleteValues(apiQuizz);
 
   console.log(apiQuizz);
 
-  const quizz = findQuizz(id);
+  // const quizz = findQuizz(id);
 }
 
-function goToBasicInfoCreation(quizz) {
+function goToBasicInfoCreationAndCompleteValues(quizz) {
   const criacaoInfosBasicas = document.getElementById('criacao-infos-basicas');
   const navegacao = document.getElementById('navegacao');
   const quizzTitle = document.getElementById("quizzTitle");
@@ -66,6 +68,20 @@ function goToBasicInfoCreation(quizz) {
   criacaoInfosBasicas.style.display = 'block';
 }
 
+function goToQuestionsCreationAndCompleteValues(quizz) {
+  const answersLabels = document.getElementsByName("answer-label");
+  const questionsText = document.getElementsByName("question-text");
+  const questionsBackgroundColor = document.getElementsByName(
+      "question-background-color"
+  );
+  const imagesUrl = document.getElementsByName("image-url");
+
+  for (let i = 0; i < questionsText.length; i++) {
+    questionsText[i].value = quizz.questions[i].title;
+    questionsBackgroundColor[i].value = quizz.questions[i].color;
+  }
+}
+
 async function getQuizz(id) {
   const { data } = await axios.get(
     `https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`
@@ -74,7 +90,15 @@ async function getQuizz(id) {
   return data;
 }
 
-async function deleteQuizz(id) {}
+async function deleteQuizz(id) {
+  const quizz = findQuizz(id);
+
+  await axios.delete(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`, {
+    headers: {
+      "Secret-Key": quizz.key
+    }
+  })
+}
 
 function findQuizz(id) {
   const quizzIdAndKeys = JSON.parse(localStorage.getItem("quizzIdAndKey"));

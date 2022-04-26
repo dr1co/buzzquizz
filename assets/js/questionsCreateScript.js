@@ -7,6 +7,12 @@ function createQuestionsInputs() {
   for (let i = 1; i <= quizzObjectRequest.numberQuestions; i++) {
     questions.innerHTML += questionTemplate(i);
   }
+  const apiQuizz = JSON.parse(localStorage.getItem('apiQuizz'));
+
+  if (apiQuizz) {
+    goToQuestionsCreationAndCompleteValues(apiQuizz);
+    // localStorage.removeItem('apiQuizz');
+  }
 }
 
 function saveObjectData() {
