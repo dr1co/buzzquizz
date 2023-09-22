@@ -76,7 +76,7 @@ function loadUserQuizzes(element) {
 
 function printNewQuizzButton() {
     const userQuizzes = document.querySelector(".user-quizzes");
-    userQuizzesList = userQuizzes.querySelectorAll("li");
+    const userQuizzesList = userQuizzes.querySelectorAll("li");
     if(userQuizzesList.length === 0)
     {
         userQuizzes.innerHTML = `<div class="create-quizz flex flex-direction-column justify-content-center align-items-center">
